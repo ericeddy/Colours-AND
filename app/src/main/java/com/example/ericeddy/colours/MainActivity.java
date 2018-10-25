@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+    private SettingsView settings;
 
     private ColourPanel panel;
 
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         pausePlayButton = findViewById(R.id.play_button);
         refreshButton = findViewById(R.id.refresh_button);
 
+        settings = findViewById(R.id.settings);
+
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                settings.displaySettings();
             }
         });
 

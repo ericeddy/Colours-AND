@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/root_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/overlay">
+    android:background="@color/overlay"
+    android:visibility="gone">
     <RelativeLayout
+        android:id="@+id/background"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:background="@drawable/background_settings"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,9 +29,11 @@
                 android:textColor="@color/white"
                 android:text="Settings"/>
 
+            <!-- Touch Types -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
@@ -50,15 +56,17 @@
                         android:orientation="vertical"
                         android:gravity="center_horizontal">
                         <ImageView
+                            android:id="@+id/setting_touch_type_default_image"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_touch_app_black_24dp"/>
                         <TextView
+                            android:id="@+id/setting_touch_type_default_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
                             android:textSize="12sp"
-                            android:textColor="@color/white"
+                            android:textColor="@color/grey_b"
                             android:text="Standard"/>
                     </LinearLayout>
 
@@ -70,19 +78,22 @@
                         android:orientation="vertical"
                         android:gravity="center_horizontal">
                         <ImageView
+                            android:id="@+id/setting_touch_type_color_image"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_colorize_black_24dp"/>
                         <TextView
+                            android:id="@+id/setting_touch_type_color_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
                             android:textSize="12sp"
-                            android:textColor="@color/white"
+                            android:textColor="@color/grey_b"
                             android:text="Select Color"
                             android:gravity="center_horizontal"/>
                     </LinearLayout>
 
+                    <!--
                     <LinearLayout
                         android:id="@+id/setting_touch_effects"
                         android:layout_width="0dp"
@@ -102,8 +113,68 @@
                             android:textColor="@color/white"
                             android:text="Extra"
                             android:gravity="center_horizontal"/>
-                    </LinearLayout>
+                    </LinearLayout> -->
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Touch Size -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:text="Touch Size"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginHorizontal="20dp">
+
+                    <ImageView
+                        android:id="@+id/size_small_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/size_content_layout"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_expand_less_black_24dp"/>
+
+                    <ImageView
+                        android:id="@+id/size_large_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/size_content_layout"
+                        android:src="@drawable/ic_expand_more_black_24dp"
+                        android:layout_centerVertical="true"/>
+
+                    <RelativeLayout
+                        android:id="@+id/size_content_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/background_counter"
+                        android:layout_centerInParent="true">
+                        <TextView
+                            android:id="@+id/size_content"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:fontFamily="sans-serif"
+                            android:textSize="12sp"
+                            android:text="0"
+                            android:gravity="center_horizontal"
+                            android:layout_centerInParent="true"/>
+                    </RelativeLayout>
+
+
+
+                </RelativeLayout>
 
             </LinearLayout>
 

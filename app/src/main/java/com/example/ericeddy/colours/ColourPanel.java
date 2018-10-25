@@ -30,7 +30,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
     private int currentCellX = -1;
     private int currentCellY = -1;
 
-    private int touchSize = 1;
+    private int touchSize = 0;
 
     private boolean needsDraw = false;
     private boolean isPlaying = false;

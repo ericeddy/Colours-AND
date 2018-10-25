@@ -62,5 +62,13 @@
 
     </LinearLayout>
 
+    <com.example.ericeddy.colours.SettingsView
+        android:id="@+id/settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:clickable="false">
+
+    </com.example.ericeddy.colours.SettingsView>
 
 </RelativeLayout>
