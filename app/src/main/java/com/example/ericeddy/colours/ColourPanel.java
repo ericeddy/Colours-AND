@@ -222,10 +222,11 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
         int[] defaultRainbowRes = {R.color.default_rainbow_11, R.color.default_rainbow_12, R.color.default_rainbow_13, R.color.default_rainbow_14,
                 R.color.default_rainbow_21, R.color.default_rainbow_22, R.color.default_rainbow_23, R.color.default_rainbow_24,
                 R.color.default_rainbow_31, R.color.default_rainbow_32, R.color.default_rainbow_33, R.color.default_rainbow_34,
-                R.color.default_rainbow_41, R.color.default_rainbow_42, R.color.default_rainbow_43, R.color.default_rainbow_44,
+                /*R.color.default_rainbow_41, R.color.default_rainbow_42, R.color.default_rainbow_43, R.color.default_rainbow_44,*/
                 R.color.default_rainbow_51, R.color.default_rainbow_52, R.color.default_rainbow_53, R.color.default_rainbow_54,
                 R.color.default_rainbow_61, R.color.default_rainbow_62, R.color.default_rainbow_63, R.color.default_rainbow_64,
-                R.color.default_rainbow_71, R.color.default_rainbow_72, R.color.default_rainbow_73, R.color.default_rainbow_74 };
+                R.color.default_rainbow_71, R.color.default_rainbow_72, R.color.default_rainbow_73, R.color.default_rainbow_74,
+                R.color.default_rainbow_81, R.color.default_rainbow_82, R.color.default_rainbow_83, R.color.default_rainbow_84 };
         colours = defaultRainbowRes;
     }
 

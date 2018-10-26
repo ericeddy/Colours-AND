@@ -23,40 +23,46 @@
     <!-- For the inbetween colours -->
     <!-- https://meyerweb.com/eric/tools/color-blend/#FF0000:FF7F1E:2:hex -->
 
-    <color name="default_rainbow_11">#ff0000</color>
-    <color name="default_rainbow_12">#FF2008</color>
-    <color name="default_rainbow_13">#FF400F</color>
-    <color name="default_rainbow_14">#FF5F17</color>
+    <color name="default_rainbow_11">#FF0000</color>
+    <color name="default_rainbow_12">#FF2000</color>
+    <color name="default_rainbow_13">#FF4000</color>
+    <color name="default_rainbow_14">#FF6000</color>
 
-    <color name="default_rainbow_21">#ff7f1e</color>
-    <color name="default_rainbow_22">#FF9D17</color>
-    <color name="default_rainbow_23">#FFBB10</color>
-    <color name="default_rainbow_24">#FFD809</color>
+    <color name="default_rainbow_21">#FF8000</color>
+    <color name="default_rainbow_22">#FF9F00</color>
+    <color name="default_rainbow_23">#FFBF00</color>
+    <color name="default_rainbow_24">#FFDF00</color>
 
-    <color name="default_rainbow_31">#fff602</color>
-    <color name="default_rainbow_32">#C0F802</color>
-    <color name="default_rainbow_33">#82FB01</color>
-    <color name="default_rainbow_34">#04FF00</color>
+    <color name="default_rainbow_31">#FFFF00</color>
+    <color name="default_rainbow_32">#D1FF00</color>
+    <color name="default_rainbow_33">#B9FF00</color>
+    <color name="default_rainbow_34">#8BFF00</color>
 
-    <color name="default_rainbow_41">#04ff00</color>
-    <color name="default_rainbow_42">#0BEF40</color>
-    <color name="default_rainbow_43">#11DF80</color>
-    <color name="default_rainbow_44">#18CFBF</color>
+    <!--
+    <color name="default_rainbow_41">#00FF00</color>
+    <color name="default_rainbow_42">#60FF00</color>
+    <color name="default_rainbow_43">#40FF00</color>
+    <color name="default_rainbow_44">#20FF00</color> -->
 
-    <color name="default_rainbow_51">#1ebfff</color>
-    <color name="default_rainbow_52">#2497FF</color>
-    <color name="default_rainbow_53">#2A6FFF</color>
-    <color name="default_rainbow_54">#2F46FF</color>
+    <color name="default_rainbow_51">#00FF00</color>
+    <color name="default_rainbow_52">#00DF20</color>
+    <color name="default_rainbow_53">#00BF40</color>
+    <color name="default_rainbow_54">#009F60</color>
 
-    <color name="default_rainbow_61">#351eff</color>
-    <color name="default_rainbow_62">#4C17FF</color>
-    <color name="default_rainbow_63">#630FFF</color>
-    <color name="default_rainbow_64">#7908FF</color>
+    <color name="default_rainbow_61">#008080</color>
+    <color name="default_rainbow_62">#00609F</color>
+    <color name="default_rainbow_63">#0040BF</color>
+    <color name="default_rainbow_64">#0020DF</color>
 
-    <color name="default_rainbow_71">#9000ff</color>
-    <color name="default_rainbow_72">#AC00BF</color>
-    <color name="default_rainbow_73">#C80080</color>
-    <color name="default_rainbow_74">#E30040</color>
+    <color name="default_rainbow_71">#0000FF</color>
+    <color name="default_rainbow_72">#2000DF</color>
+    <color name="default_rainbow_73">#4000BF</color>
+    <color name="default_rainbow_74">#60009F</color>
+
+    <color name="default_rainbow_81">#800080</color>
+    <color name="default_rainbow_82">#9F0060</color>
+    <color name="default_rainbow_83">#BF0040</color>
+    <color name="default_rainbow_84">#DF0020</color>
 
     <color name="colorPrimary">#800080</color>
     <color name="colorPrimaryDark">#610062</color>
