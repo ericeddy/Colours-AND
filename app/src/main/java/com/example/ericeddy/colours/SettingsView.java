@@ -150,6 +150,8 @@ public class SettingsView extends RelativeLayout {
 
     public void changeTouchSize(boolean increase) {
         touchSize = touchSize + ( increase ? 1 : -1 );
+        PreferenceManager.setTouchSize(touchSize);
+        MainActivity.touchSizeChanged();
         handleChanges();
     }
     private void handleChanges() {

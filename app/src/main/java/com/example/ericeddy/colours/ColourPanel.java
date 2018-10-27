@@ -133,10 +133,6 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
         int cellX = (int)Math.floor(event.getX() / cellSize);
         int cellY = (int)Math.floor(event.getY() / cellSize);
-
-        if(cellY > yNumCells || cellX > xNumCells) {
-            return true;
-        }
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             currentCellX = cellX;
             currentCellY = cellY;
@@ -162,11 +158,46 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
         if( touchSize == 0 ){
             increaseCellValue(cellY, cellX);
         } else {
+            ArrayList<Integer> cellsToAffect = new ArrayList<>();
 
+            int length = 1 + (touchSize * 2); // touch = 1; length = 3;
+            int skip = 0;
+            for(int j = 0; j <= touchSize; j++ ){ // x
+                int offsetY = -touchSize;
+                for(int i = 0; i < length; i++ ){ // y
+                    int c_cellY = cellY + offsetY;
+                    if(j > 0) {
+                        int c_cellX1 = cellX + skip;
+                        int c_cellX2 = cellX - skip;
+                        if(i >= skip && i < length - skip){
+                            increaseCellValue(c_cellY, c_cellX1);
+                            increaseCellValue(c_cellY, c_cellX2);
+                        }
+                    } else {
+                        increaseCellValue(c_cellY, cellX);
+
+                    }
+                    offsetY++;
+                }
+                skip++;
+            }
+
+//            for( int j = 0; j < length; j++ ){
+//                int offsetX = -touchSize;
+//                int c_cellY = offsetY + cellY;
+//                for(int i = 0; i < length; i++ ){
+//                    int c_cellX = offsetX + cellX;
+//
+//
+//
+//                    offsetX++;
+//                }
+//                offsetY++;
+//            }
         }
     }
     private void increaseCellValue(int cellY, int cellX) {
-        if(cellY > yNumCells || cellX > xNumCells) {
+        if(cellY < 0 || cellY >= yNumCells || cellX < 0 || cellX >= xNumCells) {
             return;
         }
         int newValue = cells[cellY][cellX] + 1;
@@ -252,5 +283,8 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
                 increaseCellValue(yCell, xCell);
             }
         }
+    }
+    public void touchSizeChanged(){
+        touchSize = PreferenceManager.getTouchSize();
     }
 }

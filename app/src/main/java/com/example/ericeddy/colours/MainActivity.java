@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         playImage = findViewById(R.id.play_button_image);
         setPlaying(false);
         MainActivity.sInstance = this;
+        panel.touchSizeChanged();
     }
 
     @Override
@@ -102,5 +103,9 @@ public class MainActivity extends AppCompatActivity {
 // TODO Auto-generated method stub
         super.onPause();
         panel.MyGameSurfaceView_OnPause();
+    }
+    public static void touchSizeChanged() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        mainActivity.panel.touchSizeChanged();
     }
 }
