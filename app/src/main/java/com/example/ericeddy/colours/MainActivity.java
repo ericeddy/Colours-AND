@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private SettingsView settings;
 
     private ColourPanel panel;
+    private int[][] cells;
 
     private RelativeLayout settingsButton;
     private RelativeLayout pausePlayButton;
@@ -97,11 +98,14 @@ public class MainActivity extends AppCompatActivity {
 // TODO Auto-generated method stub
         super.onResume();
         panel.MyGameSurfaceView_OnResume();
+        if(cells != null)panel.setCells(cells);
     }
     @Override
     protected void onPause() {
 // TODO Auto-generated method stub
         super.onPause();
+        cells = panel.getCells();
+        if( isPlaying ) setPlaying(false);
         panel.MyGameSurfaceView_OnPause();
     }
     public static void touchSizeChanged() {

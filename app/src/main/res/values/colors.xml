@@ -28,15 +28,30 @@
     <color name="default_rainbow_13">#FF4000</color>
     <color name="default_rainbow_14">#FF6000</color>
 
+    <color name="light_rainbow_11">#ff6666</color>
+    <color name="light_rainbow_12">#ff7a66</color>
+    <color name="light_rainbow_13">#ff8c66</color>
+    <color name="light_rainbow_14">#ffa166</color>
+
     <color name="default_rainbow_21">#FF8000</color>
     <color name="default_rainbow_22">#FF9F00</color>
     <color name="default_rainbow_23">#FFBF00</color>
     <color name="default_rainbow_24">#FFDF00</color>
 
+    <color name="light_rainbow_21">#ffb366</color>
+    <color name="light_rainbow_22">#ffc466</color>
+    <color name="light_rainbow_23">#ffd966</color>
+    <color name="light_rainbow_24">#ffeb66</color>
+
     <color name="default_rainbow_31">#FFFF00</color>
     <color name="default_rainbow_32">#D1FF00</color>
     <color name="default_rainbow_33">#B9FF00</color>
     <color name="default_rainbow_34">#8BFF00</color>
+
+    <color name="light_rainbow_31">#ffff66</color>
+    <color name="light_rainbow_32">#e3ff66</color>
+    <color name="light_rainbow_33">#d6ff66</color>
+    <color name="light_rainbow_34">#baff66</color>
 
     <!--
     <color name="default_rainbow_41">#00FF00</color>
@@ -49,20 +64,40 @@
     <color name="default_rainbow_53">#00BF40</color>
     <color name="default_rainbow_54">#009F60</color>
 
+    <color name="light_rainbow_51">#66ff66</color>
+    <color name="light_rainbow_52">#59de6d</color>
+    <color name="light_rainbow_53">#4dbf73</color>
+    <color name="light_rainbow_54">#3f9e78</color>
+
     <color name="default_rainbow_61">#008080</color>
     <color name="default_rainbow_62">#00609F</color>
     <color name="default_rainbow_63">#0040BF</color>
     <color name="default_rainbow_64">#0020DF</color>
+
+    <color name="light_rainbow_61">#338080</color>
+    <color name="light_rainbow_62">#3f789e</color>
+    <color name="light_rainbow_63">#4d73bf</color>
+    <color name="light_rainbow_64">#596dde</color>
 
     <color name="default_rainbow_71">#0000DF</color>
     <color name="default_rainbow_72">#2000DF</color>
     <color name="default_rainbow_73">#4000BF</color>
     <color name="default_rainbow_74">#60009F</color>
 
+    <color name="light_rainbow_71">#5959de</color>
+    <color name="light_rainbow_72">#6d59de</color>
+    <color name="light_rainbow_73">#734dbf</color>
+    <color name="light_rainbow_74">#783f9e</color>
+
     <color name="default_rainbow_81">#800080</color>
     <color name="default_rainbow_82">#9F0060</color>
     <color name="default_rainbow_83">#BF0040</color>
     <color name="default_rainbow_84">#DF0020</color>
+
+    <color name="light_rainbow_81">#803380</color>
+    <color name="light_rainbow_82">#9e3f78</color>
+    <color name="light_rainbow_83">#bf4d73</color>
+    <color name="light_rainbow_84">#de596d</color>
 
     <color name="colorPrimary">#800080</color>
     <color name="colorPrimaryDark">#610062</color>

@@ -43,6 +43,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
     SurfaceHolder surfaceHolder;
 
     int myCanvas_w, myCanvas_h;
+    ArrayList<int[][]> memory = new ArrayList<>();
 
 
     public ColourPanel(Context context) {
@@ -64,12 +65,6 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
         setFocusable(true);
 
         generateDefaultBitmaps();
-        post(new Runnable() {
-            @Override
-            public void run() {
-                generateDefaultCells();
-            }
-        });
     }
 
     @Override
@@ -78,6 +73,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        Log.v("COLORPANEL", "surface created");
         myCanvas_w = getMeasuredWidth();
         myCanvas_h = getMeasuredHeight();
 
@@ -88,10 +84,22 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
         screenBMP = Bitmap.createBitmap(maxWidth, maxHeight, Bitmap.Config.ARGB_8888);
         mCanvas.setBitmap(screenBMP);
         matrix = new Matrix();
+
+        post(new Runnable() {
+            @Override
+            public void run() {
+                if(cellSize == 0){
+                    generateDefaultCells();
+                } else {
+                    needsDraw = true;
+                }
+            }
+        });
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
+        Log.v("COLORPANEL", "surface destroyed");
 //        boolean retry = true;
 //        while (retry) {
 //            try {
@@ -136,6 +144,8 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             currentCellX = cellX;
             currentCellY = cellY;
+
+            memory.add(cells);
 
             // Increase this cell by 1 //
             cellTouched(cellY, cellX);
@@ -250,14 +260,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public void generateDefaultBitmaps() {
         // Depending on value we'll make 21 (maybe 28) bitmaps for sequencing //
-        int[] defaultRainbowRes = {R.color.default_rainbow_11, R.color.default_rainbow_12, R.color.default_rainbow_13, R.color.default_rainbow_14,
-                R.color.default_rainbow_21, R.color.default_rainbow_22, R.color.default_rainbow_23, R.color.default_rainbow_24,
-                R.color.default_rainbow_31, R.color.default_rainbow_32, R.color.default_rainbow_33, R.color.default_rainbow_34,
-                /*R.color.default_rainbow_41, R.color.default_rainbow_42, R.color.default_rainbow_43, R.color.default_rainbow_44,*/
-                R.color.default_rainbow_51, R.color.default_rainbow_52, R.color.default_rainbow_53, R.color.default_rainbow_54,
-                R.color.default_rainbow_61, R.color.default_rainbow_62, R.color.default_rainbow_63, R.color.default_rainbow_64,
-                R.color.default_rainbow_71, R.color.default_rainbow_72, R.color.default_rainbow_73, R.color.default_rainbow_74,
-                R.color.default_rainbow_81, R.color.default_rainbow_82, R.color.default_rainbow_83, R.color.default_rainbow_84 };
+        int[] defaultRainbowRes = Helper.getLightColors();
         colours = defaultRainbowRes;
     }
 
@@ -286,5 +289,11 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
     }
     public void touchSizeChanged(){
         touchSize = PreferenceManager.getTouchSize();
+    }
+    public int[][] getCells() {
+        return cells;
+    }
+    public void setCells(int[][] newValue) {
+        cells = newValue;
     }
 }
