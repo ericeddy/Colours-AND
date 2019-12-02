@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/root_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/overlay"
+    android:visibility="gone">
+    <RelativeLayout
+        android:id="@+id/view_background"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_settings"
+        android:layout_centerInParent="true"
+        android:padding="8dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp" >
+            <View
+                android:id="@+id/preset_1"
+                android:layout_height="60dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:background="@color/black"/>
+            <View
+                android:id="@+id/preset_2"
+                android:layout_height="60dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:background="@color/black"/>
+            <View
+                android:id="@+id/preset_3"
+                android:layout_height="60dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:background="@color/black"/>
+            <View
+                android:id="@+id/preset_4"
+                android:layout_height="60dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:background="@color/black"/>
+            <View
+                android:id="@+id/preset_5"
+                android:layout_height="60dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:background="@color/black"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

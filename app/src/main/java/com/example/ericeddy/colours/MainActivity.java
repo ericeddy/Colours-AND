@@ -27,13 +27,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private SettingsView settings;
+    private PresetLayoutsView presetLayouts;
 
     private ColourPanel panel;
-    private int[][] cells;
+    private int[][] pausedCells;
 
-    private RelativeLayout settingsButton;
+    private RelativeLayout themesButton;
     private RelativeLayout pausePlayButton;
     private RelativeLayout refreshButton;
+    private RelativeLayout settingsButton;
 
     private ImageView pauseImage;
     private ImageView playImage;
@@ -61,11 +63,14 @@ public class MainActivity extends AppCompatActivity {
 
         panel = findViewById(R.id.panel);
 
-        settingsButton = findViewById(R.id.color_button);
+        themesButton = findViewById(R.id.color_button);
+        settingsButton = findViewById(R.id.settings_button);
         pausePlayButton = findViewById(R.id.play_button);
         refreshButton = findViewById(R.id.refresh_button);
 
         settings = findViewById(R.id.settings);
+        presetLayouts = findViewById(R.id.presets_panel);
+        presetLayouts.panel = panel;
 
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         pausePlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                panel.addMemoryState();
                 setPlaying(!isPlaying);
             }
         });
@@ -83,6 +89,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 settings.displaySettings();
+            }
+        });
+        themesButton.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presetLayouts.displaySettings();
             }
         });
 
@@ -98,18 +110,24 @@ public class MainActivity extends AppCompatActivity {
 // TODO Auto-generated method stub
         super.onResume();
         panel.MyGameSurfaceView_OnResume();
-        if(cells != null)panel.setCells(cells);
+        if(pausedCells != null)panel.setCells(pausedCells);
     }
     @Override
     protected void onPause() {
 // TODO Auto-generated method stub
         super.onPause();
-        cells = panel.getCells();
+        pausedCells = panel.getCellsCopy();
         if( isPlaying ) setPlaying(false);
         panel.MyGameSurfaceView_OnPause();
     }
     public static void touchSizeChanged() {
         MainActivity mainActivity = MainActivity.getInstance();
         mainActivity.panel.touchSizeChanged();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if( isPlaying ) setPlaying(false);
+        panel.undoLastAction();
     }
 }

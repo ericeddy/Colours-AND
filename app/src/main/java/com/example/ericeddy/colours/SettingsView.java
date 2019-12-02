@@ -17,7 +17,6 @@ public class SettingsView extends RelativeLayout {
     private Context mContext;
 
     private RelativeLayout rootView;
-    private RelativeLayout background;
 
     private LinearLayout standardButton;
     private ImageView standardImage;

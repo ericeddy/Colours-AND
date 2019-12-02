@@ -1,5 +1,6 @@
 package com.example.ericeddy.colours;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -24,8 +26,8 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
     private int[] colours;
     private int[][] cells;
     private int cellSize = 0;
-    private int xNumCells = 24;
-    private int yNumCells = 0;
+    public int xNumCells = 24;
+    public int yNumCells = 0;
 
     private int currentCellX = -1;
     private int currentCellY = -1;
@@ -145,7 +147,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
             currentCellX = cellX;
             currentCellY = cellY;
 
-            memory.add(cells);
+            addMemoryState();
 
             // Increase this cell by 1 //
             cellTouched(cellY, cellX);
@@ -162,6 +164,11 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
             return true;
         }
         return super.onTouchEvent(event);
+    }
+
+    public void addMemoryState() {
+        memory.add( getCellsCopy() );
+        Log.v("Color Panel", "Memory Size:" + memory.size());
     }
 
     private void cellTouched(int cellY, int cellX){
@@ -237,6 +244,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
         needsDraw = false;
     }
 
+    @SuppressLint("WrongCall")
     public void updateSurfaceView(){
 //The function run in background thread, not ui thread.
 
@@ -275,6 +283,8 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
         needsDraw = true;
     }
     public void resetCells() {
+        memory.clear();
+        memory = new ArrayList<>();
         generateDefaultCells();
     }
     public void setIsPlaying(boolean isPlaying) {
@@ -295,5 +305,24 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
     }
     public void setCells(int[][] newValue) {
         cells = newValue;
+    }
+
+    public int[][] getCellsCopy() {
+        if (cells == null || cells.length == 0) return null;
+        int length = cells.length;
+        int[][] target = new int[length][cells[0].length];
+        for (int i = 0; i < length; i++) {
+            System.arraycopy(cells[i], 0, target[i], 0, cells[i].length);
+        }
+        return target;
+    }
+
+    public void undoLastAction() {
+        if(memory.size() == 0) return;
+        int index = memory.size()-1;
+        setCells(memory.get(index));
+        memory.remove(index);
+        needsDraw = true;
+        Log.v("Color Panel", "Memory Size:" + memory.size());
     }
 }
