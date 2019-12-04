@@ -1,22 +1,15 @@
 package com.example.ericeddy.colours;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class SettingsView extends RelativeLayout {
-
-    private Context mContext;
-
-    private RelativeLayout rootView;
+public class SettingsView extends DialogView {
 
     private LinearLayout standardButton;
     private ImageView standardImage;
@@ -39,46 +32,30 @@ public class SettingsView extends RelativeLayout {
 
     public SettingsView(Context context) {
         super(context);
-        mContext = context;
         init();
     }
 
     public SettingsView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
         init();
     }
 
     public SettingsView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mContext = context;
         init();
     }
 
     public SettingsView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        mContext = context;
         init();
     }
 
-    private void init() {
+    @Override
+    protected void init() {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.view_settings, this, true);
 
-        rootView = findViewById(R.id.root_view);
-        rootView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                closeSettings();
-            }
-        });
-        RelativeLayout mainViewBG = findViewById(R.id.view_background);
-        mainViewBG.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        super.init();
 
         standardButton = findViewById(R.id.setting_touch_type_default);
         standardImage = findViewById(R.id.setting_touch_type_default_image);
@@ -131,21 +108,17 @@ public class SettingsView extends RelativeLayout {
         handleChanges();
     }
 
-    public void displaySettings() {
+    @Override
+    public void displayDialog() {
+        super.displayDialog();
         // Do animate in //
         touchType = PreferenceManager.getTouchType();
         touchColour = PreferenceManager.getTouchColour(); // Sort out what to do with that //
         touchSize = PreferenceManager.getTouchSize();
 
         handleChanges();
-
-        rootView.setVisibility(View.VISIBLE);
     }
 
-    public void closeSettings() {
-        // Do Animate Out //
-        rootView.setVisibility(View.GONE);
-    }
 
     public void changeTouchSize(boolean increase) {
         touchSize = touchSize + ( increase ? 1 : -1 );

@@ -12,6 +12,7 @@ public class PreferenceManager {
     private static final String KEY_TOUCH_TYPE = "KEY_TOUCH_TYPE";
     private static final String KEY_TOUCH_TYPE_COLOUR = "KEY_TOUCH_TYPE_COLOUR";
     private static final String KEY_TOUCH_SIZE = "KEY_TOUCH_SIZE";
+    private static final String KEY_PLAYING_FORWARDS = "KEY_PLAYING_FORWARDS";
 
     public static void setTouchType(int type) {
         setInteger(KEY_PREFERENCES, KEY_TOUCH_TYPE, type);
@@ -32,6 +33,13 @@ public class PreferenceManager {
     }
     public static int getTouchSize(){
         return getInteger(KEY_PREFERENCES, KEY_TOUCH_SIZE, 0);
+    }
+
+    public static void setPlayingForwards(boolean isForwards) {
+        setBoolean(KEY_PREFERENCES, KEY_PLAYING_FORWARDS, isForwards);
+    }
+    public static boolean getPlayingForwards(){
+        return getBoolean(KEY_PREFERENCES, KEY_PLAYING_FORWARDS, true);
     }
 
 

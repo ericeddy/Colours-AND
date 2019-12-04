@@ -3,11 +3,8 @@ package com.example.ericeddy.colours;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,83 +23,32 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    private SettingsView settings;
+    private SettingsBar settingsBar;
+    private SettingsView settingsDialog;
     private PresetLayoutsView presetLayouts;
 
     private ColourPanel panel;
     private int[][] pausedCells;
 
-    private RelativeLayout themesButton;
-    private RelativeLayout pausePlayButton;
-    private RelativeLayout refreshButton;
-    private RelativeLayout settingsButton;
-
-    private ImageView pauseImage;
-    private ImageView playImage;
-
-    private boolean isPlaying = false;
-    private void setPlaying(boolean playing) {
-        isPlaying = playing;
-        if(isPlaying){
-            pauseImage.setVisibility(View.VISIBLE);
-            playImage.setVisibility(View.GONE);
-        } else {
-            pauseImage.setVisibility(View.GONE);
-            playImage.setVisibility(View.VISIBLE);
-        }
-        panel.setIsPlaying(isPlaying);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.sInstance = this;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_main);
 
         panel = findViewById(R.id.panel);
 
-        themesButton = findViewById(R.id.color_button);
-        settingsButton = findViewById(R.id.settings_button);
-        pausePlayButton = findViewById(R.id.play_button);
-        refreshButton = findViewById(R.id.refresh_button);
-
-        settings = findViewById(R.id.settings);
+        settingsBar = findViewById(R.id.bottom_bar);
+        settingsDialog = findViewById(R.id.settings);
         presetLayouts = findViewById(R.id.presets_panel);
         presetLayouts.panel = panel;
 
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                panel.resetCells();
-            }
-        });
-        pausePlayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                panel.addMemoryState();
-                setPlaying(!isPlaying);
-            }
-        });
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                settings.displaySettings();
-            }
-        });
-        themesButton.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presetLayouts.displaySettings();
-            }
-        });
-
-        pauseImage = findViewById(R.id.pause_button_image);
-        playImage = findViewById(R.id.play_button_image);
         setPlaying(false);
-        MainActivity.sInstance = this;
+        panel.brushTypeChanged();
         panel.touchSizeChanged();
+        panel.isPlayingForwardsChanged();
     }
 
     @Override
@@ -117,17 +63,65 @@ public class MainActivity extends AppCompatActivity {
 // TODO Auto-generated method stub
         super.onPause();
         pausedCells = panel.getCellsCopy();
-        if( isPlaying ) setPlaying(false);
+        if( settingsBar.isPlaying ) setPlaying(false);
         panel.MyGameSurfaceView_OnPause();
-    }
-    public static void touchSizeChanged() {
-        MainActivity mainActivity = MainActivity.getInstance();
-        mainActivity.panel.touchSizeChanged();
     }
 
     @Override
     public void onBackPressed() {
-        if( isPlaying ) setPlaying(false);
+        if( settingsBar.isPlaying ) setPlaying(false);
         panel.undoLastAction();
+    }
+
+    public void displayPresetsDialog() {
+        if( settingsBar.isPlaying ) setPlaying(false);
+        presetLayouts.displayDialog();
+    }
+
+
+    public static void displayPresets() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.displayPresetsDialog();
+        }
+
+    }
+    public static void playingForwardsChanged() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.panel.isPlayingForwardsChanged();
+        }
+    }
+    public static void brushTypeChanged() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.panel.brushTypeChanged();
+        }
+    }
+    public static void touchSizeChanged() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.panel.touchSizeChanged();
+        }
+    }
+
+
+    public static void clearTouched() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.panel.resetCells();
+        }
+
+    }
+
+    public static void setPlaying(boolean playing) {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            if(playing){
+                mainActivity.panel.addMemoryState();
+            }
+            mainActivity.panel.setIsPlaying(playing);
+
+        }
     }
 }

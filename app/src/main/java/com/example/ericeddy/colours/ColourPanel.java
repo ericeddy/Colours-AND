@@ -1,11 +1,9 @@
 package com.example.ericeddy.colours;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -16,7 +14,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -33,13 +30,16 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
     private int currentCellY = -1;
 
     private int touchSize = 0;
+    private int brushType = 0;
+    private int brushColorType = -1;
 
     private boolean needsDraw = false;
     private boolean isPlaying = false;
+    private boolean isPlayingForwards = true;
 
     private Canvas mCanvas;
     private Bitmap screenBMP;
-    private Matrix matrix;
+    private Matrix matrix = new Matrix();
 
 
     SurfaceHolder surfaceHolder;
@@ -119,7 +119,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
         getHolder().addCallback(this);
 
 //Create and start background Thread
-        thread = new LoopThread(this, 20);
+        thread = new LoopThread(this, 5);
         thread.setRunning(true);
         thread.start();
 
@@ -173,7 +173,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
 
     private void cellTouched(int cellY, int cellX){
         if( touchSize == 0 ){
-            increaseCellValue(cellY, cellX);
+            affectCellValue(cellY, cellX);
         } else {
             ArrayList<Integer> cellsToAffect = new ArrayList<>();
 
@@ -187,11 +187,11 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
                         int c_cellX1 = cellX + skip;
                         int c_cellX2 = cellX - skip;
                         if(i >= skip && i < length - skip){
-                            increaseCellValue(c_cellY, c_cellX1);
-                            increaseCellValue(c_cellY, c_cellX2);
+                            affectCellValue(c_cellY, c_cellX1);
+                            affectCellValue(c_cellY, c_cellX2);
                         }
                     } else {
-                        increaseCellValue(c_cellY, cellX);
+                        affectCellValue(c_cellY, cellX);
 
                     }
                     offsetY++;
@@ -213,20 +213,47 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
 //            }
         }
     }
-    private void increaseCellValue(int cellY, int cellX) {
+    private void affectCellValue(int cellY, int cellX) {
         if(cellY < 0 || cellY >= yNumCells || cellX < 0 || cellX >= xNumCells) {
             return;
         }
-        int newValue = cells[cellY][cellX] + 1;
+        int newValue = 0;
+        if(brushType == 0) {
+            newValue = cells[cellY][cellX] + 1;
+        } else if (brushType == 1) {
+            newValue = cells[cellY][cellX] - 1;
+        } else if(brushType == 2) {
+            newValue = brushColorType;
+        }
         if(newValue >= colours.length){
             newValue = 0;
+        } else if( newValue < 0 ) {
+            newValue = colours.length - 1;
+        }
+        cells[cellY][cellX] = newValue;
+    }
+
+    private void affectCellPlayingValue(int cellY, int cellX) {
+        if(cellY < 0 || cellY >= yNumCells || cellX < 0 || cellX >= xNumCells) {
+            return;
+        }
+        int newValue;
+        if(isPlayingForwards) {
+            newValue = cells[cellY][cellX] + 1;
+        } else {
+            newValue = cells[cellY][cellX] - 1;
+        }
+        if(newValue >= colours.length){
+            newValue = 0;
+        } else if( newValue < 0 ) {
+            newValue = colours.length - 1;
         }
         cells[cellY][cellX] = newValue;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if( canvas == null/*!needsDraw || screenBMP == null || mCanvas == null*/){
+        if( canvas == null || matrix == null || screenBMP == null/*!needsDraw || screenBMP == null || mCanvas == null*/){
             return;
         }
 
@@ -293,13 +320,11 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
     public void increaseAllCells() {
         for(int yCell = 0; yCell < yNumCells; yCell++) {
             for (int xCell = 0; xCell < xNumCells; xCell++) {
-                increaseCellValue(yCell, xCell);
+                affectCellPlayingValue(yCell, xCell);
             }
         }
     }
-    public void touchSizeChanged(){
-        touchSize = PreferenceManager.getTouchSize();
-    }
+
     public int[][] getCells() {
         return cells;
     }
@@ -324,5 +349,16 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
         memory.remove(index);
         needsDraw = true;
         Log.v("Color Panel", "Memory Size:" + memory.size());
+    }
+
+    public void isPlayingForwardsChanged(){
+        isPlayingForwards = PreferenceManager.getPlayingForwards();
+    }
+    public void touchSizeChanged(){
+        touchSize = PreferenceManager.getTouchSize();
+    }
+    public void brushTypeChanged() {
+        brushType = PreferenceManager.getTouchType();
+        brushColorType = PreferenceManager.getTouchColour();
     }
 }
