@@ -25,7 +25,7 @@ public class PreferenceManager {
         setInteger(KEY_PREFERENCES, KEY_TOUCH_TYPE_COLOUR, colour);
     }
     public static int getTouchColour(){
-        return getInteger(KEY_PREFERENCES, KEY_TOUCH_TYPE_COLOUR, 0);
+        return getInteger(KEY_PREFERENCES, KEY_TOUCH_TYPE_COLOUR, -1);
     }
 
     public static void setTouchSize(int size) {

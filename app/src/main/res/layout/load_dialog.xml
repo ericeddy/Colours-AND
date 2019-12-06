@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/root_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/overlay"
+    android:visibility="gone">
+    <RelativeLayout
+        android:id="@+id/view_background"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_settings"
+        android:layout_centerInParent="true"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:text="Load Design"/>
+
+            <!-- Touch Types -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="144dp"
+                    android:background="@drawable/background_counter">
+
+                    <TextView
+                        android:id="@+id/empty_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:textSize="16sp"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/white"
+                        android:alpha="0.6"
+                        android:gravity="center"
+                        android:text="You haven't saved\nany designs yet"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/loaded_designs"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

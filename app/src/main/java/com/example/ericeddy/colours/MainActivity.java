@@ -1,15 +1,21 @@
 package com.example.ericeddy.colours;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.SimpleCursorAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static MainActivity sInstance;
+    private DBManager dbManager;
+
     public static MainActivity getInstance() {
         if(sInstance != null){
             return sInstance;
@@ -26,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private SettingsBar settingsBar;
     private SettingsView settingsDialog;
     private PresetLayoutsView presetLayouts;
+    private SaveDialog saveDialog;
+    private AreYouSureDialog areYouSureDialog;
+    private LoadDialog loadDialog;
+    private SelectColorDialog selectColorDialog;
 
     private ColourPanel panel;
     private int[][] pausedCells;
@@ -38,12 +48,27 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
+        dbManager = new DBManager(this);
+        dbManager.open();
+
         panel = findViewById(R.id.panel);
 
         settingsBar = findViewById(R.id.bottom_bar);
         settingsDialog = findViewById(R.id.settings);
         presetLayouts = findViewById(R.id.presets_panel);
         presetLayouts.panel = panel;
+
+        saveDialog = findViewById(R.id.save_dialog);
+        saveDialog.panel = panel;
+        saveDialog.dbManager = dbManager;
+
+        loadDialog = findViewById(R.id.load_dialog);
+        loadDialog.panel = panel;
+        loadDialog.dbManager = dbManager;
+
+        selectColorDialog = findViewById(R.id.select_color_dialog);
+
+        areYouSureDialog = findViewById(R.id.are_you_sure_dialog);
 
         setPlaying(false);
         panel.brushTypeChanged();
@@ -58,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         panel.MyGameSurfaceView_OnResume();
         if(pausedCells != null)panel.setCells(pausedCells);
     }
+
     @Override
     protected void onPause() {
 // TODO Auto-generated method stub
@@ -66,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         if( settingsBar.isPlaying ) setPlaying(false);
         panel.MyGameSurfaceView_OnPause();
     }
-
     @Override
     public void onBackPressed() {
         if( settingsBar.isPlaying ) setPlaying(false);
@@ -78,6 +103,71 @@ public class MainActivity extends AppCompatActivity {
         presetLayouts.displayDialog();
     }
 
+    public void displaySave() {
+        if( settingsBar.isPlaying ) setPlaying(false);
+        saveDialog.displayDialog();
+    }
+
+
+    public static void displaySaveDialog() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.displaySave();
+        }
+
+    }
+
+    public void displayLoad() {
+        if( settingsBar.isPlaying ) setPlaying(false);
+        loadDialog.displayDialog();
+    }
+
+
+    public static void displayLoadDialog() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.displayLoad();
+        }
+
+    }
+
+    public void displayColorSelect() {
+        selectColorDialog.displayDialog();
+    }
+
+
+    public static void displayColorSelectDialog() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.displayColorSelect();
+        }
+
+    }
+
+    public void displayAreYouSureForDeleteDesign(final int id) {
+        areYouSureDialog.setYesButtonAction(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadDialog.deleteSavedDesign(id);
+                areYouSureDialog.closeDialog();
+            }
+        });
+        areYouSureDialog.setNoButtonAction(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                areYouSureDialog.closeDialog();
+            }
+        });
+        areYouSureDialog.displayDialog();
+    }
+    public static void displayAreYouSureDialogForDeleteDesign(int id) {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.displayAreYouSureForDeleteDesign(id);
+        }
+
+    }
+
 
     public static void displayPresets() {
         MainActivity mainActivity = MainActivity.getInstance();
@@ -86,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     public static void playingForwardsChanged() {
         MainActivity mainActivity = MainActivity.getInstance();
         if (mainActivity != null) {
@@ -105,6 +196,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public static void selectColorChanged() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.panel.brushTypeChanged();
+        }
+    }
 
     public static void clearTouched() {
         MainActivity mainActivity = MainActivity.getInstance();
@@ -113,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
     public static void setPlaying(boolean playing) {
         MainActivity mainActivity = MainActivity.getInstance();
         if (mainActivity != null) {
@@ -121,6 +217,19 @@ public class MainActivity extends AppCompatActivity {
                 mainActivity.panel.addMemoryState();
             }
             mainActivity.panel.setIsPlaying(playing);
+            mainActivity.settingsBar.setPlaying(playing);
+
+        }
+    }
+
+    public static void selectDesign(int[][] data) {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.panel.addMemoryState();
+            if(mainActivity.settingsBar.isPlaying){
+                setPlaying(false);
+            }
+            mainActivity.panel.setCells(data);
 
         }
     }

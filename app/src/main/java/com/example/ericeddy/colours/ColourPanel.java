@@ -295,7 +295,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public void generateDefaultBitmaps() {
         // Depending on value we'll make 21 (maybe 28) bitmaps for sequencing //
-        int[] defaultRainbowRes = Helper.getLightColors();
+        int[] defaultRainbowRes = Helper.getSelectedColors();
         colours = defaultRainbowRes;
     }
 

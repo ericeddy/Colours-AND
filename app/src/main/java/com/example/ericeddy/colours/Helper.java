@@ -24,6 +24,9 @@ public class Helper {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics());
     }
 
+    public static int[] getSelectedColors() {
+        return getLightColors();
+    }
     public static int[] getDefaultColors() {
         int[] defaultRainbowRes = {R.color.default_rainbow_11, R.color.default_rainbow_12, R.color.default_rainbow_13, R.color.default_rainbow_14,
                 R.color.default_rainbow_21, R.color.default_rainbow_22, R.color.default_rainbow_23, R.color.default_rainbow_24,

@@ -48,7 +48,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     private static final char NEXT_ITEM = ' ';
 
-    private static String serialize(int[][] array) {
+    public static String serialize(int[][] array) {
         StringBuilder s = new StringBuilder();
         s.append(array.length).append(NEXT_ITEM);
 
@@ -63,7 +63,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return s.toString();
     }
 
-    private static int[][] deserialize(String str) throws IOException {
+    public static int[][] deserialize(String str) throws IOException {
         StreamTokenizer tok = new StreamTokenizer(new StringReader(str));
         tok.resetSyntax();
         tok.wordChars('0', '9');

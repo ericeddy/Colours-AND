@@ -43,7 +43,7 @@ public class PresetLayoutsView extends DialogView {
 
         super.init();
 
-        colorLength = Helper.getLightColors().length;
+        colorLength = Helper.getSelectedColors().length;
 
         button1 = findViewById(R.id.preset_1);
         button2 = findViewById(R.id.preset_2);

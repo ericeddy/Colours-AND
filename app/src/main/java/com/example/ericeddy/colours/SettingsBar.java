@@ -267,7 +267,7 @@ public class SettingsBar extends RelativeLayout {
     }
 
     private void brushSelectAction() {
-
+        MainActivity.displayColorSelectDialog();
     }
 
     private void brushInvertAction() {
@@ -327,13 +327,13 @@ public class SettingsBar extends RelativeLayout {
     }
 
     private void controlPlayPauseAction() {
-        setPlaying(!isPlaying);
+//        setPlaying(!isPlaying);
+        MainActivity.setPlaying(!isPlaying);
     }
 
-    private void setPlaying(boolean playing) {
+    public void setPlaying(boolean playing) {
         isPlaying = playing;
         updateUI();
-        MainActivity.setPlaying(isPlaying);
     }
 
     private void themeColorAction() {
@@ -345,11 +345,11 @@ public class SettingsBar extends RelativeLayout {
     }
 
     private void themeSaveAction() {
-
+        MainActivity.displaySaveDialog();
     }
 
     private void themeLoadAction() {
-
+        MainActivity.displayLoadDialog();
     }
 
     private void themeClearAction() {
