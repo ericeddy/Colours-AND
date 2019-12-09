@@ -1,14 +1,19 @@
 package com.example.ericeddy.colours;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.Timer;
 
 public class SettingsBar extends RelativeLayout {
 
@@ -61,6 +66,7 @@ public class SettingsBar extends RelativeLayout {
     private int touchSize = 0;
     public boolean isPlaying = false;
     private boolean isPlayingForwards = true;
+    private float speed = 1;
 
     public SettingsBar(Context context) {
         super(context);
@@ -167,18 +173,26 @@ public class SettingsBar extends RelativeLayout {
             @Override
             public void onClick(View v) { brushIncreaseSizeAction(); } });
 
+        brushSizeDecreaseBtn.setOnTouchListener(new OnLongTouchRepeater(new Runnable() {
+            @Override
+            public void run() { brushDecreaseSizeAction(); } }, 150));
+        brushSizeIncreaseBtn.setOnTouchListener(new OnLongTouchRepeater(new Runnable() {
+            @Override
+            public void run() { brushIncreaseSizeAction(); } }, 150));
+
         controlsRewindBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) { controlRewindAction(); } });
         controlsForwardBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) { controlForwardAction(); } });
-        controlsSpeedDecreaseBtn.setOnClickListener(new OnClickListener() {
+
+        controlsSpeedIncreaseBtn.setOnTouchListener(new OnLongTouchRepeater(new Runnable() {
             @Override
-            public void onClick(View v) { controlDecreasSpeedAction(); } });
-        controlsSpeedIncreaseBtn.setOnClickListener(new OnClickListener() {
+            public void run() { controlIncreaseSpeedAction(); } }, 100));
+        controlsSpeedDecreaseBtn.setOnTouchListener(new OnLongTouchRepeater(new Runnable() {
             @Override
-            public void onClick(View v) { controlIncreasSpeedAction(); } });
+            public void run() { controlDecreaseSpeedAction(); } }, 100));
 
         themeColorBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -199,6 +213,7 @@ public class SettingsBar extends RelativeLayout {
         touchSize = PreferenceManager.getTouchSize();
         brushType = PreferenceManager.getTouchType();
         isPlayingForwards = PreferenceManager.getPlayingForwards();
+        speed = PreferenceManager.getPlayingSpeed();
 
         updateUI();
     }
@@ -207,6 +222,10 @@ public class SettingsBar extends RelativeLayout {
 
         String displaySizeText = "" + touchSize;
         brushSizeDisplay.setText(displaySizeText);
+
+        String displaySpeedText = String.format("%.2f", speed) + "x";
+        controlsSpeedDisplay.setText(displaySpeedText);
+
         brushDefaultSelected.setVisibility( brushType == 0 ? View.VISIBLE : View.GONE );
         brushInvertSelected.setVisibility( brushType == 1 ?  View.VISIBLE : View.GONE );
         brushSelectColorSelected.setVisibility( brushType == 2 ? View.VISIBLE : View.GONE );
@@ -283,9 +302,13 @@ public class SettingsBar extends RelativeLayout {
         MainActivity.brushTypeChanged();
         updateUI();
     }
+    public void brushColorSelected() {
+        brushType = PreferenceManager.getTouchType();
+        updateUI();
+    }
 
     private void brushDecreaseSizeAction() {
-        if(touchSize != 0){
+        if(touchSize > 1){
             changeTouchSize(false);
         }
     }
@@ -318,12 +341,28 @@ public class SettingsBar extends RelativeLayout {
         updateUI();
     }
 
-    private void controlDecreasSpeedAction() {
-
+    private void controlDecreaseSpeedAction() {
+        if(speed >= 0.02) {
+            speed = speed - 0.01f;
+        } else {
+            speed = 0.01f;
+        }
+        PreferenceManager.setPlayingSpeed(speed);
+        MainActivity.speedChanged();
     }
 
-    private void controlIncreasSpeedAction() {
+    private void controlIncreaseSpeedAction() {
+        if(speed < 1.0f) {
+            speed = speed + 0.01f;
+        } else {
+            speed = 1.0f;
+        }
+        PreferenceManager.setPlayingSpeed(speed);
+        MainActivity.speedChanged();
+    }
 
+    public void speedChanged() {
+        updateUI();
     }
 
     private void controlPlayPauseAction() {
@@ -378,5 +417,45 @@ public class SettingsBar extends RelativeLayout {
         }
     }
 
+    class OnLongTouchRepeater implements OnTouchListener {
+
+        Handler timerHandler = new Handler();
+        Runnable repeatMethod;
+        boolean finished = false;
+        int loopNum = 0; int loopSpeed;
+
+        public OnLongTouchRepeater(final Runnable method, int loop) {
+            super();
+            loopSpeed = loop;
+            repeatMethod = new Runnable() {
+                @Override
+                public void run() {
+                    if(!finished){
+                        loopNum++;
+                        timerHandler.post(method);
+                        int offset = (loopNum * 2);
+                        int delay = loopSpeed - (offset > loopSpeed/2 ? loopSpeed/2 : offset);
+                        timerHandler.postDelayed(repeatMethod, delay);
+                    }
+                }
+            };
+        }
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                finished = false;
+                loopNum = 0;
+                timerHandler.postDelayed(repeatMethod, 0);
+            } else if(event.getAction() == MotionEvent.ACTION_MOVE){
+//                if(event.getX() < 0 || event.getX() > v.getMeasuredWidth() || event.getY() < 0 || event.getY() > v.getMeasuredHeight() ){
+//                    finished = true;
+//                }
+            } else if(event.getAction() == MotionEvent.ACTION_UP) {
+                finished = true;
+            }
+            return true;
+        }
+    }
 }
 

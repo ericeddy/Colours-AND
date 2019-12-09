@@ -1,9 +1,13 @@
 package com.example.ericeddy.colours;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -13,7 +17,10 @@ public class SelectColorDialog extends DialogView {
 
     public LinearLayout listView;
     private int[] colors;
+    private int initTouchType = 0;
     private int selectedId = -1;
+    private int listHeight;
+    private int cellSize;
 
     public SelectColorDialog(Context context) {
         super(context);
@@ -43,30 +50,80 @@ public class SelectColorDialog extends DialogView {
         super.init();
 
         listView = findViewById(R.id.list_view);
+        listView.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int yIndex = (int)(event.getY() / cellSize);
+                if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
+                    if(event.getX() > 0 && event.getX() < v.getMeasuredWidth()){
+                        if(yIndex != selectedId) {
+                            PreferenceManager.setTouchColour(yIndex);
+                            PreferenceManager.setTouchType(2);
+                            MainActivity.selectColorChanged();
+                            selectedId = yIndex;
+                            updateCells();
+                        }
+                    } else {
+                        PreferenceManager.setTouchColour(-1);
+                        PreferenceManager.setTouchType(initTouchType == 2 ? 0 : initTouchType);
+                        MainActivity.selectColorChanged();
+                        selectedId = -1;
+                        updateCells();
+                    }
+                    return true;
+                } else if(event.getAction() == MotionEvent.ACTION_UP){
+                    if(event.getX() > 0 && event.getX() < v.getMeasuredWidth()){
+                        if(yIndex != selectedId) {
+                            PreferenceManager.setTouchColour(yIndex);
+                            PreferenceManager.setTouchType(2);
+                            MainActivity.selectColorChanged();
+                            selectedId = yIndex;
+                            updateCells();
+                        }
+                    } else {
+                        PreferenceManager.setTouchColour(-1);
+                        PreferenceManager.setTouchType(initTouchType == 2 ? 0 : initTouchType);
+                        MainActivity.selectColorChanged();
+                        selectedId = -1;
+                        updateCells();
+                    }
+                    return false;
+                }
+                return true;
+            }
+        });
     }
 
     @Override
     public void displayDialog() {
         super.displayDialog();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity)(mContext)).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        listHeight = (height - Helper.convertDpToPixels(16 + 32) );// internal padding + bottom padding
         colors = Helper.getSelectedColors();
+        cellSize = listHeight / colors.length;
+        selectedId = PreferenceManager.getTouchColour();
+        initTouchType = PreferenceManager.getTouchType();
         updateCells();
     }
 
     private void updateCells() {
-        selectedId = PreferenceManager.getTouchColour();
-        for(int i = 0; i < colors.length; i++){
-            SelectColorHolder v = (SelectColorHolder)listView.getChildAt(i);
-            if(v == null ){
+        Log.v("COLORDIALOG", "Action: " + selectedId);
+        for(int i = 0; i < colors.length; i++) {
+            SelectColorHolder v = (SelectColorHolder) listView.getChildAt(i);
+            if (v == null) {
                 SelectColorHolder view = new SelectColorHolder(mContext);
-                view.setup(i, selectedId == i);
+                view.setup(i, selectedId == i, cellSize);
                 listView.addView(view);
             } else {
-                v.setup(i, selectedId == i);
+                v.setup(i, selectedId == i, cellSize);
             }
         }
+
         ViewGroup.LayoutParams ll = listView.getLayoutParams();
-        ll.height = Helper.convertDpToPixels(32 + (colors.length * 32) );
-        ll.width = Helper.convertDpToPixels(32 + 32);
+        ll.height = (colors.length * cellSize);
+        ll.width = cellSize;
         listView.setLayoutParams(ll);
     }
 
@@ -110,11 +167,12 @@ public class SelectColorDialog extends DialogView {
 
 
 
-        public void setup( int colorId, boolean selected ) {
+        public void setup( int colorId, boolean selected, int cellSize) {
             id = colorId;
             selectedView.setVisibility(selected ? View.VISIBLE : View.INVISIBLE);
-            background.setBackgroundColor( mContext.getColor(colors[colorId])
-            );
+            background.setBackgroundColor( mContext.getColor(colors[colorId]) );
+            background.getLayoutParams().width = cellSize;
+            background.getLayoutParams().height = cellSize;
         }
     }
 }

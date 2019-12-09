@@ -1,9 +1,11 @@
 package com.example.ericeddy.colours;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 
 public class DialogView extends RelativeLayout {

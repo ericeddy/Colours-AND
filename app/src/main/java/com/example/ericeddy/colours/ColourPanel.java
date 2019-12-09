@@ -35,6 +35,8 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
 
     private boolean needsDraw = false;
     private boolean isPlaying = false;
+    private float playingCounter = 0;
+    private float playingSpeed = 1;
     private boolean isPlayingForwards = true;
 
     private Canvas mCanvas;
@@ -121,6 +123,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
 //Create and start background Thread
         thread = new LoopThread(this, 5);
         thread.setRunning(true);
+        speedChanged();
         thread.start();
 
     }
@@ -277,7 +280,11 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
 
         Canvas canvas = null;
         if(isPlaying){
-            increaseAllCells();
+            playingCounter = playingCounter - playingSpeed;
+            if(playingCounter <= 0){
+                increaseAllCells();
+                playingCounter = 1 + playingCounter;
+            }
         }
 
         try{
@@ -360,5 +367,12 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
     public void brushTypeChanged() {
         brushType = PreferenceManager.getTouchType();
         brushColorType = PreferenceManager.getTouchColour();
+    }
+    public void speedChanged() {
+        playingSpeed = PreferenceManager.getPlayingSpeed();
+        if(playingSpeed == 1){
+            playingCounter = 0;
+        }
+//        thread.SPEED_MODIFIER = PreferenceManager.getPlayingSpeed();
     }
 }

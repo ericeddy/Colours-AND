@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity  {
     }
     @Override
     public void onBackPressed() {
-        if( settingsBar.isPlaying ) setPlaying(false);
         panel.undoLastAction();
     }
 
@@ -199,7 +198,17 @@ public class MainActivity extends AppCompatActivity  {
     public static void selectColorChanged() {
         MainActivity mainActivity = MainActivity.getInstance();
         if (mainActivity != null) {
+            mainActivity.settingsBar.brushColorSelected();
+
             mainActivity.panel.brushTypeChanged();
+        }
+    }
+
+    public static void speedChanged() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.settingsBar.speedChanged();
+            mainActivity.panel.speedChanged();
         }
     }
 

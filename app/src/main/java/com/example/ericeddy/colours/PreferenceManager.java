@@ -13,6 +13,7 @@ public class PreferenceManager {
     private static final String KEY_TOUCH_TYPE_COLOUR = "KEY_TOUCH_TYPE_COLOUR";
     private static final String KEY_TOUCH_SIZE = "KEY_TOUCH_SIZE";
     private static final String KEY_PLAYING_FORWARDS = "KEY_PLAYING_FORWARDS";
+    private static final String KEY_PLAYING_SPEED = "KEY_PLAYING_SPEED";
 
     public static void setTouchType(int type) {
         setInteger(KEY_PREFERENCES, KEY_TOUCH_TYPE, type);
@@ -32,7 +33,7 @@ public class PreferenceManager {
         setInteger(KEY_PREFERENCES, KEY_TOUCH_SIZE, size);
     }
     public static int getTouchSize(){
-        return getInteger(KEY_PREFERENCES, KEY_TOUCH_SIZE, 0);
+        return getInteger(KEY_PREFERENCES, KEY_TOUCH_SIZE, 1);
     }
 
     public static void setPlayingForwards(boolean isForwards) {
@@ -40,6 +41,12 @@ public class PreferenceManager {
     }
     public static boolean getPlayingForwards(){
         return getBoolean(KEY_PREFERENCES, KEY_PLAYING_FORWARDS, true);
+    }
+    public static void setPlayingSpeed(float speed) {
+        setFloat(KEY_PREFERENCES, KEY_PLAYING_SPEED, speed);
+    }
+    public static float getPlayingSpeed(){
+        return getFloat(KEY_PREFERENCES, KEY_PLAYING_SPEED, 1f);
     }
 
 
@@ -121,6 +128,16 @@ public class PreferenceManager {
     static void setInteger(String sharePrefName, String key, int defaultValue) {
         SharedPreferences.Editor editor = getEditor(sharePrefName);
         editor.putInt(key, defaultValue);
+        editor.apply();
+    }
+
+    static float getFloat(String sharePrefName, String key, float defaultValue) {
+        return getSharedPreference(sharePrefName).getFloat(key, defaultValue);
+    }
+
+    static void setFloat(String sharePrefName, String key, float defaultValue) {
+        SharedPreferences.Editor editor = getEditor(sharePrefName);
+        editor.putFloat(key, defaultValue);
         editor.apply();
     }
 

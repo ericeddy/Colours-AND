@@ -1,8 +1,6 @@
 package com.example.ericeddy.colours;
 
-import android.graphics.Canvas;
-import android.util.Log;
-import android.view.SurfaceHolder;
+import android.os.SystemClock;
 
 public class LoopThread extends Thread {
 
@@ -12,12 +10,12 @@ public class LoopThread extends Thread {
     private ColourPanel panel;
 
     // desired fps
-    private final static int 	MAX_FPS = 29;
+    private final static int 	TARGET_FPS = 29;
 
     // maximum number of frames to be skipped
     private final static int	MAX_FRAME_SKIPS = 3;
     // the frame period
-    private final static int	FRAME_PERIOD = 1000 / MAX_FPS;
+    private final static int	FRAME_PERIOD = 1000 / TARGET_FPS;
 
 
 
@@ -96,12 +94,12 @@ public class LoopThread extends Thread {
     } */
 
 
-    private final static int 	MAX_FPS = 48;
+    private final static int TARGET_FPS = 24;
 
     // maximum number of frames to be skipped
     private final static int	MAX_FRAME_SKIPS = 2;
     // the frame period
-    private final static int	FRAME_PERIOD = 1000 / MAX_FPS;
+    private final static int	FRAME_PERIOD = 1000 / TARGET_FPS;
 
     volatile boolean running = false;
 
@@ -124,32 +122,35 @@ public class LoopThread extends Thread {
         long beginTime;		// the time when the cycle begun
         long timeDiff;		// the time it took for the cycle to execute
         int sleepTime = 0;		// ms to sleep (<0 if we're behind)
-        int framesSkipped;	// number of frames being skipped
+//        int framesSkipped;	// number of frames being skipped
 
         while(running){
 
             try {
-                beginTime = System.currentTimeMillis();
-                framesSkipped = 0;	// resetting the frames skipped
-                // calculate how long did the cycle take
-                timeDiff = System.currentTimeMillis() - beginTime;
-                // calculate sleep time
-                sleepTime = (int)(FRAME_PERIOD - timeDiff);
+                beginTime = SystemClock.uptimeMillis();
 
                 parent.updateSurfaceView();
 
-                if (sleepTime > 0) {
-                    sleep(sleepTime);
-                }
-                while (sleepTime < 0 && framesSkipped < MAX_FRAME_SKIPS) {
-                    // we need to catch up
-                    // update without rendering
-//                        this.panel.update();
+//                framesSkipped = 0;	// resetting the frames skipped
+                // calculate how long did the cycle take
 
-                    // add frame period to check if in next frame
-                    sleepTime += FRAME_PERIOD;
-                    framesSkipped++;
+                timeDiff = SystemClock.uptimeMillis() - beginTime;
+                // calculate sleep time
+                sleepTime = (int)(TARGET_FPS - timeDiff);
+
+                if (sleepTime < 2) {
+                    sleepTime = 2;
                 }
+                sleep(sleepTime);
+//                while (sleepTime < 0 && framesSkipped < MAX_FRAME_SKIPS) {
+//                    // we need to catch up
+//                    // update without rendering
+////                        this.panel.update();
+//
+//                    // add frame period to check if in next frame
+//                    sleepTime += FRAME_PERIOD;
+//                    framesSkipped++;
+//                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
