@@ -60,6 +60,14 @@
         android:clickable="false">
 
     </com.example.ericeddy.colours.SelectColorDialog>
+    <com.example.ericeddy.colours.SelectThemeDialog
+        android:id="@+id/theme_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:clickable="false">
+
+    </com.example.ericeddy.colours.SelectThemeDialog>
     <com.example.ericeddy.colours.AreYouSureDialog
         android:id="@+id/are_you_sure_dialog"
         android:layout_width="match_parent"

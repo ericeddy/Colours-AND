@@ -23,7 +23,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
     private int[] colours;
     private int[][] cells;
     private int cellSize = 0;
-    public int xNumCells = 24;
+    public int xNumCells = 28;
     public int yNumCells = 0;
 
     private int currentCellX = -1;
@@ -32,6 +32,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
     private int touchSize = 0;
     private int brushType = 0;
     private int brushColorType = -1;
+    private int theme = 0;
 
     private boolean needsDraw = false;
     private boolean isPlaying = false;
@@ -374,5 +375,9 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
             playingCounter = 0;
         }
 //        thread.SPEED_MODIFIER = PreferenceManager.getPlayingSpeed();
+    }
+
+    public void themeChanged() {
+        generateDefaultBitmaps();
     }
 }

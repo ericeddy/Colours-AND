@@ -18,6 +18,7 @@ public class SelectColorDialog extends DialogView {
     public LinearLayout listView;
     private int[] colors;
     private int initTouchType = 0;
+    private int currentTouchType = 0;
     private int selectedId = -1;
     private int listHeight;
     private int cellSize;
@@ -97,6 +98,9 @@ public class SelectColorDialog extends DialogView {
     @Override
     public void displayDialog() {
         super.displayDialog();
+
+        Helper.printColors();
+
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity)(mContext)).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
@@ -109,15 +113,15 @@ public class SelectColorDialog extends DialogView {
     }
 
     private void updateCells() {
-        Log.v("COLORDIALOG", "Action: " + selectedId);
+        currentTouchType = PreferenceManager.getTouchType();
         for(int i = 0; i < colors.length; i++) {
             SelectColorHolder v = (SelectColorHolder) listView.getChildAt(i);
             if (v == null) {
                 SelectColorHolder view = new SelectColorHolder(mContext);
-                view.setup(i, selectedId == i, cellSize);
+                view.setup(i, (selectedId == i && currentTouchType == 2), cellSize, colors);
                 listView.addView(view);
             } else {
-                v.setup(i, selectedId == i, cellSize);
+                v.setup(i, (selectedId == i && currentTouchType == 2), cellSize, colors);
             }
         }
 
@@ -127,8 +131,9 @@ public class SelectColorDialog extends DialogView {
         listView.setLayoutParams(ll);
     }
 
-    class SelectColorHolder extends RelativeLayout {
+    static class SelectColorHolder extends RelativeLayout {
 
+        private Context mContext;
         private RelativeLayout background;
         private View selectedView;
         private int id;
@@ -167,7 +172,7 @@ public class SelectColorDialog extends DialogView {
 
 
 
-        public void setup( int colorId, boolean selected, int cellSize) {
+        public void setup( int colorId, boolean selected, int cellSize, int[] colors) {
             id = colorId;
             selectedView.setVisibility(selected ? View.VISIBLE : View.INVISIBLE);
             background.setBackgroundColor( mContext.getColor(colors[colorId]) );

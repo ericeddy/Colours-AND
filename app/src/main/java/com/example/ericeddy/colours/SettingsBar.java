@@ -308,7 +308,7 @@ public class SettingsBar extends RelativeLayout {
     }
 
     private void brushDecreaseSizeAction() {
-        if(touchSize > 1){
+        if(touchSize > 0){
             changeTouchSize(false);
         }
     }
@@ -376,7 +376,7 @@ public class SettingsBar extends RelativeLayout {
     }
 
     private void themeColorAction() {
-
+        MainActivity.displayThemeDialog();
     }
 
     private void themePresetsAction() {

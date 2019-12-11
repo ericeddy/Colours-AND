@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity  {
     private AreYouSureDialog areYouSureDialog;
     private LoadDialog loadDialog;
     private SelectColorDialog selectColorDialog;
+    private SelectThemeDialog selectThemeDialog;
 
     private ColourPanel panel;
     private int[][] pausedCells;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity  {
         loadDialog.dbManager = dbManager;
 
         selectColorDialog = findViewById(R.id.select_color_dialog);
+        selectThemeDialog = findViewById(R.id.theme_dialog);
 
         areYouSureDialog = findViewById(R.id.are_you_sure_dialog);
 
@@ -126,6 +128,19 @@ public class MainActivity extends AppCompatActivity  {
         MainActivity mainActivity = MainActivity.getInstance();
         if (mainActivity != null) {
             mainActivity.displayLoad();
+        }
+
+    }
+
+    public void displayTheme() {
+        selectThemeDialog.displayDialog();
+    }
+
+
+    public static void displayThemeDialog() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.displayTheme();
         }
 
     }
@@ -212,12 +227,19 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
+
+    public static void themeChanged() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.panel.themeChanged();
+        }
+    }
+
     public static void clearTouched() {
         MainActivity mainActivity = MainActivity.getInstance();
         if (mainActivity != null) {
             mainActivity.panel.resetCells();
         }
-
     }
     public static void setPlaying(boolean playing) {
         MainActivity mainActivity = MainActivity.getInstance();

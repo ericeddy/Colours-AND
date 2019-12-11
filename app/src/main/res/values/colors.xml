@@ -93,6 +93,73 @@
     <color name="light_rainbow_83">#e65c8a</color>
     <color name="light_rainbow_84">#f26177</color>
 
+
+    <color name="dark_rainbow_11">#800000</color>
+    <color name="dark_rainbow_12">#802400</color>
+    <color name="dark_rainbow_13">#803400</color>
+    <color name="dark_rainbow_14">#804200</color>
+
+    <color name="dark_rainbow_21">#804d00</color>
+    <color name="dark_rainbow_22">#805e00</color>
+    <color name="dark_rainbow_23">#807300</color>
+    <color name="dark_rainbow_24">#808500</color>
+
+    <color name="dark_rainbow_31">#809900</color>
+    <color name="dark_rainbow_32">#609600</color>
+    <color name="dark_rainbow_33">#408d00</color>
+    <color name="dark_rainbow_34">#168800</color>
+
+    <color name="dark_rainbow_51">#008000</color>
+    <color name="dark_rainbow_52">#007c32</color>
+    <color name="dark_rainbow_53">#007850</color>
+    <color name="dark_rainbow_54">#007468</color>
+
+    <color name="dark_rainbow_61">#006480</color>
+    <color name="dark_rainbow_62">#005080</color>
+    <color name="dark_rainbow_63">#004080</color>
+    <color name="dark_rainbow_64">#003280</color>
+
+    <color name="dark_rainbow_71">#1a1a80</color>
+    <color name="dark_rainbow_72">#220072</color>
+    <color name="dark_rainbow_73">#33006c</color>
+    <color name="dark_rainbow_74">#440068</color>
+
+    <color name="dark_rainbow_81">#550064</color>
+    <color name="dark_rainbow_82">#660048</color>
+    <color name="dark_rainbow_83">#76003c</color>
+    <color name="dark_rainbow_84">#7d0028</color>
+
+
+    <color name="green_rainbow_11">#00ff00</color>
+    <color name="green_rainbow_12">#00f200</color>
+    <color name="green_rainbow_13">#00e500</color>
+    <color name="green_rainbow_14">#00d800</color>
+    <color name="green_rainbow_21">#00cc00</color>
+    <color name="green_rainbow_22">#00bf00</color>
+    <color name="green_rainbow_23">#00b200</color>
+    <color name="green_rainbow_24">#00a500</color>
+    <color name="green_rainbow_31">#009900</color>
+    <color name="green_rainbow_32">#028a02</color>
+    <color name="green_rainbow_33">#057b05</color>
+    <color name="green_rainbow_34">#076c07</color>
+    <color name="green_rainbow_51">#0a5d0a</color>
+    <color name="green_rainbow_52">#0c4e0c</color>
+    <color name="green_rainbow_53">#0f3f0f</color>
+    <color name="green_rainbow_54">#164d16</color>
+    <color name="green_rainbow_61">#1d5b1d</color>
+    <color name="green_rainbow_62">#246a24</color>
+    <color name="green_rainbow_63">#2b782b</color>
+    <color name="green_rainbow_64">#328632</color>
+    <color name="green_rainbow_71">#399539</color>
+    <color name="green_rainbow_72">#40a340</color>
+    <color name="green_rainbow_73">#47b247</color>
+    <color name="green_rainbow_74">#3bbb3b</color>
+    <color name="green_rainbow_81">#2fc52f</color>
+    <color name="green_rainbow_82">#23ce23</color>
+    <color name="green_rainbow_83">#12dd12</color>
+    <color name="green_rainbow_84">#02f202</color>
+
+
     <color name="colorPrimary">#800080</color>
     <color name="colorPrimaryDark">#610062</color>
     <color name="colorAccent">#EA00E9</color>

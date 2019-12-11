@@ -14,6 +14,7 @@ public class PreferenceManager {
     private static final String KEY_TOUCH_SIZE = "KEY_TOUCH_SIZE";
     private static final String KEY_PLAYING_FORWARDS = "KEY_PLAYING_FORWARDS";
     private static final String KEY_PLAYING_SPEED = "KEY_PLAYING_SPEED";
+    private static final String KEY_THEME = "KEY_THEME";
 
     public static void setTouchType(int type) {
         setInteger(KEY_PREFERENCES, KEY_TOUCH_TYPE, type);
@@ -33,7 +34,7 @@ public class PreferenceManager {
         setInteger(KEY_PREFERENCES, KEY_TOUCH_SIZE, size);
     }
     public static int getTouchSize(){
-        return getInteger(KEY_PREFERENCES, KEY_TOUCH_SIZE, 1);
+        return getInteger(KEY_PREFERENCES, KEY_TOUCH_SIZE, 0);
     }
 
     public static void setPlayingForwards(boolean isForwards) {
@@ -47,6 +48,12 @@ public class PreferenceManager {
     }
     public static float getPlayingSpeed(){
         return getFloat(KEY_PREFERENCES, KEY_PLAYING_SPEED, 1f);
+    }
+    public static void setTheme(int theme) {
+        setInteger(KEY_PREFERENCES, KEY_THEME, theme);
+    }
+    public static int getTheme(){
+        return getInteger(KEY_PREFERENCES, KEY_THEME, 0);
     }
 
 
