@@ -99,7 +99,7 @@ public class SelectColorDialog extends DialogView {
     public void displayDialog() {
         super.displayDialog();
 
-        Helper.printColors();
+        Helper.printBlueColors();
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity)(mContext)).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);

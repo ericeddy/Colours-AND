@@ -34,7 +34,12 @@ public class Helper {
             _themesList.add( getDefaultColors() );
             _themesList.add( getLightColors() );
             _themesList.add( getDarkColors() );
+            _themesList.add( getRedColors() );
+            _themesList.add( getOrangeColors() );
+            _themesList.add( getYellowColors() );
             _themesList.add( getGreenColors() );
+            _themesList.add( getBlueColors() );
+            _themesList.add( getPurpleColors() );
         }
         return _themesList;
     }
@@ -88,6 +93,63 @@ public class Helper {
         return lightRainbowRes;
     }
 
+    public static int[] getOrangeColors() {
+        int[] lightRainbowRes = {
+                R.color.orange_rainbow_11, R.color.orange_rainbow_12, R.color.orange_rainbow_13, R.color.orange_rainbow_14,
+                R.color.orange_rainbow_21, R.color.orange_rainbow_22, R.color.orange_rainbow_23, R.color.orange_rainbow_24,
+                R.color.orange_rainbow_31, R.color.orange_rainbow_32, R.color.orange_rainbow_33, R.color.orange_rainbow_34,
+                R.color.orange_rainbow_51, R.color.orange_rainbow_52, R.color.orange_rainbow_53, R.color.orange_rainbow_54,
+                R.color.orange_rainbow_61, R.color.orange_rainbow_62, R.color.orange_rainbow_63, R.color.orange_rainbow_64,
+                R.color.orange_rainbow_71, R.color.orange_rainbow_72, R.color.orange_rainbow_73, R.color.orange_rainbow_74,
+                R.color.orange_rainbow_81, R.color.orange_rainbow_82, R.color.orange_rainbow_83, R.color.orange_rainbow_84 };
+        return lightRainbowRes;
+    }
+
+    public static int[] getPurpleColors() {
+        int[] lightRainbowRes = {
+                R.color.purple_rainbow_11, R.color.purple_rainbow_12, R.color.purple_rainbow_13, R.color.purple_rainbow_14,
+                R.color.purple_rainbow_21, R.color.purple_rainbow_22, R.color.purple_rainbow_23, R.color.purple_rainbow_24,
+                R.color.purple_rainbow_31, R.color.purple_rainbow_32, R.color.purple_rainbow_33, R.color.purple_rainbow_34,
+                R.color.purple_rainbow_51, R.color.purple_rainbow_52, R.color.purple_rainbow_53, R.color.purple_rainbow_54,
+                R.color.purple_rainbow_61, R.color.purple_rainbow_62, R.color.purple_rainbow_63, R.color.purple_rainbow_64,
+                R.color.purple_rainbow_71, R.color.purple_rainbow_72, R.color.purple_rainbow_73, R.color.purple_rainbow_74,
+                R.color.purple_rainbow_81, R.color.purple_rainbow_82, R.color.purple_rainbow_83, R.color.purple_rainbow_84 };
+        return lightRainbowRes;
+    }
+    public static int[] getRedColors() {
+        int[] lightRainbowRes = {
+                R.color.red_rainbow_11, R.color.red_rainbow_12, R.color.red_rainbow_13, R.color.red_rainbow_14,
+                R.color.red_rainbow_21, R.color.red_rainbow_22, R.color.red_rainbow_23, R.color.red_rainbow_24,
+                R.color.red_rainbow_31, R.color.red_rainbow_32, R.color.red_rainbow_33, R.color.red_rainbow_34,
+                R.color.red_rainbow_51, R.color.red_rainbow_52, R.color.red_rainbow_53, R.color.red_rainbow_54,
+                R.color.red_rainbow_61, R.color.red_rainbow_62, R.color.red_rainbow_63, R.color.red_rainbow_64,
+                R.color.red_rainbow_71, R.color.red_rainbow_72, R.color.red_rainbow_73, R.color.red_rainbow_74,
+                R.color.red_rainbow_81, R.color.red_rainbow_82, R.color.red_rainbow_83, R.color.red_rainbow_84 };
+        return lightRainbowRes;
+    }
+    public static int[] getYellowColors() {
+        int[] lightRainbowRes = {
+                R.color.yellow_rainbow_11, R.color.yellow_rainbow_12, R.color.yellow_rainbow_13, R.color.yellow_rainbow_14,
+                R.color.yellow_rainbow_21, R.color.yellow_rainbow_22, R.color.yellow_rainbow_23, R.color.yellow_rainbow_24,
+                R.color.yellow_rainbow_31, R.color.yellow_rainbow_32, R.color.yellow_rainbow_33, R.color.yellow_rainbow_34,
+                R.color.yellow_rainbow_51, R.color.yellow_rainbow_52, R.color.yellow_rainbow_53, R.color.yellow_rainbow_54,
+                R.color.yellow_rainbow_61, R.color.yellow_rainbow_62, R.color.yellow_rainbow_63, R.color.yellow_rainbow_64,
+                R.color.yellow_rainbow_71, R.color.yellow_rainbow_72, R.color.yellow_rainbow_73, R.color.yellow_rainbow_74,
+                R.color.yellow_rainbow_81, R.color.yellow_rainbow_82, R.color.yellow_rainbow_83, R.color.yellow_rainbow_84 };
+        return lightRainbowRes;
+    }
+    public static int[] getBlueColors() {
+        int[] lightRainbowRes = {
+                R.color.blue_rainbow_11, R.color.blue_rainbow_12, R.color.blue_rainbow_13, R.color.blue_rainbow_14,
+                R.color.blue_rainbow_21, R.color.blue_rainbow_22, R.color.blue_rainbow_23, R.color.blue_rainbow_24,
+                R.color.blue_rainbow_31, R.color.blue_rainbow_32, R.color.blue_rainbow_33, R.color.blue_rainbow_34,
+                R.color.blue_rainbow_51, R.color.blue_rainbow_52, R.color.blue_rainbow_53, R.color.blue_rainbow_54,
+                R.color.blue_rainbow_61, R.color.blue_rainbow_62, R.color.blue_rainbow_63, R.color.blue_rainbow_64,
+                R.color.blue_rainbow_71, R.color.blue_rainbow_72, R.color.blue_rainbow_73, R.color.blue_rainbow_74,
+                R.color.blue_rainbow_81, R.color.blue_rainbow_82, R.color.blue_rainbow_83, R.color.blue_rainbow_84 };
+        return lightRainbowRes;
+    }
+
     public static void printGreenColors() {
         int sr = 0; int sg = 245; int sb = 0;
         float fr = sr; float fg = sg; float fb = sb;
@@ -157,38 +219,55 @@ public class Helper {
         }
 
     }
-    public static void printGreenColors() {
-        int sr = 0; int sg = 245; int sb = 0;
+    public static void printOrangeColors() {
+        int sr = 255; int sg = (int)((float)sr * 0.5); int sb = 0;
         float fr = sr; float fg = sg; float fb = sb;
         int r = sr; int g = sg; int b = sb;
 
         int l = 28;
         int l1 = 8; int l2 = 6; int l3 = 8; int l4 = 6;
 
-        int g1 = (int)((float)255 * 0.6);
-        int g2 = (int)((float)255 * 0.25);
-        int g3 = (int)((float)255 * 0.7);
-        int g4 = (245);
+        int r1 = (int)((float)255 * 0.6);
+        int r2 = (int)((float)255 * 0.25);
+        int r3 = (int)((float)255 * 0.7);
+        int r4 = 255;
 
-        int r1 = 0;
-        int r2 = (int)((float)255 * 0.06);
-        int r3 = (int)((float)255 * 0.28);
-        int r4 = 0;
+        int b1 = 0;
+        int b2 = 31;
+        int b3 = 71;
+        int b4 = 0;
 
-        float dg1 = (float)(255 - g1) / (float)l1;
+        int g1 = (int)(((float)r1 * 0.5) + ((float)b1 * 0.5));
+        int g2 = (int)(((float)r2 * 0.5) + ((float)b2 * 0.5));
+        int g3 = (int)(((float)r3 * 0.5) + ((float)b3 * 0.5));
+        int g4 = (int)(((float)r4 * 0.5) + ((float)b4 * 0.5));
+
+        float dg1 = (float)(sg - g1) / (float)l1;
         float dg2 = (float)(g2 - g1) / (float)l2;
         float dg3 = (float)(g3 - g2) / (float)l3;
         float dg4 = (float)(g4 - g3) / (float)l3;
 
-        float dr2 = (float)r2 / (float)l2;
+        float dr1 = (float)(sr-r1) / (float)l1;
+        float dr2 = (float)(r2-r1) / (float)l2;
         float dr3 = (float)(r3-r2) / (float)l3;
         float dr4 = (float)(r4-r3) / (float)l4;
+
+        float db1 = (float)(sb-b1) / (float)l1;
+        float db2 = (float)(b2-b1) / (float)l2;
+        float db3 = (float)(b3-b2) / (float)l3;
+        float db4 = (float)(b4-b3) / (float)l4;
 
 
         for(int i = 0; i < l; i++){
             if(i < l1){
+                fr = sr - (dr1 * i);
+                r = (int)fr;
+
                 fg = sg - (dg1 * i);
                 g = (int)fg;
+
+                fb = sb - (db1 * i);
+                b = (int)fb;
             } else if(i < l1 + l2){
                 int i2 = i - l1;
                 fr = r1 + (dr2 * i2);
@@ -197,7 +276,7 @@ public class Helper {
                 fg = g1 + (dg2 * i2);
                 g = (int)fg;
 
-                fb = r1 + (dr2 * i2);
+                fb = b1 + (db2 * i2);
                 b = (int)fb;
 
             } else if(i < l1 + l2 + l3){
@@ -208,7 +287,7 @@ public class Helper {
                 fg = g2 + (dg3 * i3);
                 g = (int)fg;
 
-                fb = r2 + (dr3 * i3);
+                fb = b2 + (db3 * i3);
                 b = (int)fb;
             } else if(i < l1 + l2 + l3 + l4){
                 int i4 = i - l1 - l2 - l3;
@@ -218,14 +297,361 @@ public class Helper {
                 fg = g3 + (dg4 * i4);
                 g = (int)fg;
 
-                fb = r3 + (dr4 * i4);
+                fb = b3 + (db4 * i4);
                 b = (int)fb;
             }
 //            Log.v("GREEN", i + " - " + r + " " + g + " " + b);
-            Log.v("GREEN", " - " + getHexString(r) + "" + getHexString(g) + "" + getHexString(b));
+            Log.v("ORANGE", " - " + getHexString(r) + "" + getHexString(g) + "" + getHexString(b));
         }
 
     }
+    public static void printPurpleColors() {
+        int sr = (int)((float)255 * 0.66); int sg = 0; int sb = 255;
+        float fr = sr; float fg = sg; float fb = sb;
+        int r = sr; int g = sg; int b = sb;
+
+        int l = 28;
+        int l1 = 8; int l2 = 6; int l3 = 8; int l4 = 6;
+
+        int b1 = (int)((float)255 * 0.6);
+        int b2 = (int)((float)255 * 0.25);
+        int b3 = (int)((float)255 * 0.6);
+        int b4 = 255;
+
+        int g1 = 0;
+        int g2 = 26;
+        int g3 = 61;
+        int g4 = 0;
+
+        int r1 = (int)(((float)b1 * 0.66) + ((float)g1 * 0.33));
+        int r2 = (int)(((float)b2 * 0.66) + ((float)g2 * 0.33));
+        int r3 = (int)(((float)b3 * 0.66) + ((float)g3 * 0.33));
+        int r4 = (int)(((float)b4 * 0.66) + ((float)g4 * 0.33));
+
+        float dg1 = (float)(sg - g1) / (float)l1;
+        float dg2 = (float)(g2 - g1) / (float)l2;
+        float dg3 = (float)(g3 - g2) / (float)l3;
+        float dg4 = (float)(g4 - g3) / (float)l3;
+
+        float dr1 = (float)(sr-r1) / (float)l1;
+        float dr2 = (float)(r2-r1) / (float)l2;
+        float dr3 = (float)(r3-r2) / (float)l3;
+        float dr4 = (float)(r4-r3) / (float)l4;
+
+        float db1 = (float)(sb-b1) / (float)l1;
+        float db2 = (float)(b2-b1) / (float)l2;
+        float db3 = (float)(b3-b2) / (float)l3;
+        float db4 = (float)(b4-b3) / (float)l4;
+
+
+        for(int i = 0; i < l; i++){
+            if(i < l1){
+                fr = sr - (dr1 * i);
+                r = (int)fr;
+
+                fg = sg - (dg1 * i);
+                g = (int)fg;
+
+                fb = sb - (db1 * i);
+                b = (int)fb;
+            } else if(i < l1 + l2){
+                int i2 = i - l1;
+                fr = r1 + (dr2 * i2);
+                r = (int)fr;
+
+                fg = g1 + (dg2 * i2);
+                g = (int)fg;
+
+                fb = b1 + (db2 * i2);
+                b = (int)fb;
+
+            } else if(i < l1 + l2 + l3){
+                int i3 = i - l1 - l2;
+                fr = r2 + (dr3 * i3);
+                r = (int)fr;
+
+                fg = g2 + (dg3 * i3);
+                g = (int)fg;
+
+                fb = b2 + (db3 * i3);
+                b = (int)fb;
+            } else if(i < l1 + l2 + l3 + l4){
+                int i4 = i - l1 - l2 - l3;
+                fr = r3 + (dr4 * i4);
+                r = (int)fr;
+
+                fg = g3 + (dg4 * i4);
+                g = (int)fg;
+
+                fb = b3 + (db4 * i4);
+                b = (int)fb;
+            }
+//            Log.v("GREEN", i + " - " + r + " " + g + " " + b);
+            Log.v("PURPLE", " - " + getHexString(r) + "" + getHexString(g) + "" + getHexString(b));
+        }
+
+    }
+
+
+    public static void printRedColors() {
+        int sr = 255; int sg = 0; int sb = 0;
+        float fr = sr; float fg = sg; float fb = sb;
+        int r = sr; int g = sg; int b = sb;
+
+        int l = 28;
+        int l1 = 8; int l2 = 6; int l3 = 8; int l4 = 6;
+
+        int r1 = (int)((float)255 * 0.6);
+        int r2 = (int)((float)255 * 0.25);
+        int r3 = (int)((float)255 * 0.6);
+        int r4 = 255;
+
+        int g1 = 0;
+        int g2 = 26;
+        int g3 = 71;
+        int g4 = 0;
+
+        int b1 = g1;
+        int b2 = g2;
+        int b3 = g3;
+        int b4 = g4;
+
+        float dg1 = (float)(sg - g1) / (float)l1;
+        float dg2 = (float)(g2 - g1) / (float)l2;
+        float dg3 = (float)(g3 - g2) / (float)l3;
+        float dg4 = (float)(g4 - g3) / (float)l3;
+
+        float dr1 = (float)(sr-r1) / (float)l1;
+        float dr2 = (float)(r2-r1) / (float)l2;
+        float dr3 = (float)(r3-r2) / (float)l3;
+        float dr4 = (float)(r4-r3) / (float)l4;
+
+        float db1 = (float)(sb-b1) / (float)l1;
+        float db2 = (float)(b2-b1) / (float)l2;
+        float db3 = (float)(b3-b2) / (float)l3;
+        float db4 = (float)(b4-b3) / (float)l4;
+
+
+        for(int i = 0; i < l; i++){
+            if(i < l1){
+                fr = sr - (dr1 * i);
+                r = (int)fr;
+
+                fg = sg - (dg1 * i);
+                g = (int)fg;
+
+                fb = sb - (db1 * i);
+                b = (int)fb;
+            } else if(i < l1 + l2){
+                int i2 = i - l1;
+                fr = r1 + (dr2 * i2);
+                r = (int)fr;
+
+                fg = g1 + (dg2 * i2);
+                g = (int)fg;
+
+                fb = b1 + (db2 * i2);
+                b = (int)fb;
+
+            } else if(i < l1 + l2 + l3){
+                int i3 = i - l1 - l2;
+                fr = r2 + (dr3 * i3);
+                r = (int)fr;
+
+                fg = g2 + (dg3 * i3);
+                g = (int)fg;
+
+                fb = b2 + (db3 * i3);
+                b = (int)fb;
+            } else if(i < l1 + l2 + l3 + l4){
+                int i4 = i - l1 - l2 - l3;
+                fr = r3 + (dr4 * i4);
+                r = (int)fr;
+
+                fg = g3 + (dg4 * i4);
+                g = (int)fg;
+
+                fb = b3 + (db4 * i4);
+                b = (int)fb;
+            }
+//            Log.v("GREEN", i + " - " + r + " " + g + " " + b);
+            Log.v("PURPLE", " - " + getHexString(r) + "" + getHexString(g) + "" + getHexString(b));
+        }
+
+    }
+    public static void printYellowColors() {
+        int sr = 230; int sg = 230; int sb = 0;
+        float fr = sr; float fg = sg; float fb = sb;
+        int r = sr; int g = sg; int b = sb;
+
+        int l = 28;
+        int l1 = 8; int l2 = 6; int l3 = 8; int l4 = 6;
+
+        int r1 = (int)((float)255 * 0.6);
+        int r2 = (int)((float)255 * 0.25);
+        int r3 = (int)((float)255 * 0.6);
+        int r4 = 230;
+
+        int g1 = r1;
+        int g2 = r2;
+        int g3 = r3;
+        int g4 = r4;
+
+        int b1 = 0;
+        int b2 = 41;
+        int b3 = 71;
+        int b4 = 0;
+
+        float dg1 = (float)(sg - g1) / (float)l1;
+        float dg2 = (float)(g2 - g1) / (float)l2;
+        float dg3 = (float)(g3 - g2) / (float)l3;
+        float dg4 = (float)(g4 - g3) / (float)l3;
+
+        float dr1 = (float)(sr-r1) / (float)l1;
+        float dr2 = (float)(r2-r1) / (float)l2;
+        float dr3 = (float)(r3-r2) / (float)l3;
+        float dr4 = (float)(r4-r3) / (float)l4;
+
+        float db1 = (float)(sb-b1) / (float)l1;
+        float db2 = (float)(b2-b1) / (float)l2;
+        float db3 = (float)(b3-b2) / (float)l3;
+        float db4 = (float)(b4-b3) / (float)l4;
+
+
+        for(int i = 0; i < l; i++){
+            if(i < l1){
+                fr = sr - (dr1 * i);
+                r = (int)fr;
+
+                fg = fr;
+                g = (int)fg;
+
+                fb = sb - (db1 * i);
+                b = (int)fb;
+            } else if(i < l1 + l2){
+                int i2 = i - l1;
+                fr = r1 + (dr2 * i2);
+                r = (int)fr;
+
+                fg = fr;
+                g = (int)fg;
+
+                fb = b1 + (db2 * i2);
+                b = (int)fb;
+
+            } else if(i < l1 + l2 + l3){
+                int i3 = i - l1 - l2;
+                fr = r2 + (dr3 * i3);
+                r = (int)fr;
+
+                fg = fr;
+                g = (int)fg;
+
+                fb = b2 + (db3 * i3);
+                b = (int)fb;
+            } else if(i < l1 + l2 + l3 + l4){
+                int i4 = i - l1 - l2 - l3;
+                fr = r3 + (dr4 * i4);
+                r = (int)fr;
+
+                fg = fr;
+                g = (int)fg;
+
+                fb = b3 + (db4 * i4);
+                b = (int)fb;
+            }
+//            Log.v("GREEN", i + " - " + r + " " + g + " " + b);
+            Log.v("YELLOW", " - " + getHexString(r) + "" + getHexString(g) + "" + getHexString(b));
+        }
+
+    }
+    public static void printBlueColors() {
+        int sr = 0; int sg = 0; int sb = 255;
+        float fr = sr; float fg = sg; float fb = sb;
+        int r = sr; int g = sg; int b = sb;
+
+        int l = 28;
+        int l1 = 8; int l2 = 6; int l3 = 8; int l4 = 6;
+
+        int b1 = (int)((float)255 * 0.6);
+        int b2 = (int)((float)255 * 0.25);
+        int b3 = (int)((float)255 * 0.7);
+        int b4 = 255;
+
+        int g1 = 0;
+        int g2 = 13;
+        int g3 = 26;
+        int g4 = 0;
+
+        int r1 = g1;
+        int r2 = g2;
+        int r3 = g3;
+        int r4 = g4;
+
+        float dg1 = (float)(sg - g1) / (float)l1;
+        float dg2 = (float)(g2 - g1) / (float)l2;
+        float dg3 = (float)(g3 - g2) / (float)l3;
+        float dg4 = (float)(g4 - g3) / (float)l3;
+
+        float dr1 = (float)(sr-r1) / (float)l1;
+        float dr2 = (float)(r2-r1) / (float)l2;
+        float dr3 = (float)(r3-r2) / (float)l3;
+        float dr4 = (float)(r4-r3) / (float)l4;
+
+        float db1 = (float)(sb-b1) / (float)l1;
+        float db2 = (float)(b2-b1) / (float)l2;
+        float db3 = (float)(b3-b2) / (float)l3;
+        float db4 = (float)(b4-b3) / (float)l4;
+
+
+        for(int i = 0; i < l; i++){
+            if(i < l1){
+                fr = sr - (dr1 * i);
+                r = (int)fr;
+
+                fg = fr;
+                g = (int)fg;
+
+                fb = sb - (db1 * i);
+                b = (int)fb;
+            } else if(i < l1 + l2){
+                int i2 = i - l1;
+                fr = r1 + (dr2 * i2);
+                r = (int)fr;
+
+                fg = fr;
+                g = (int)fg;
+
+                fb = b1 + (db2 * i2);
+                b = (int)fb;
+
+            } else if(i < l1 + l2 + l3){
+                int i3 = i - l1 - l2;
+                fr = r2 + (dr3 * i3);
+                r = (int)fr;
+
+                fg = fr;
+                g = (int)fg;
+
+                fb = b2 + (db3 * i3);
+                b = (int)fb;
+            } else if(i < l1 + l2 + l3 + l4){
+                int i4 = i - l1 - l2 - l3;
+                fr = r3 + (dr4 * i4);
+                r = (int)fr;
+
+                fg = fr;
+                g = (int)fg;
+
+                fb = b3 + (db4 * i4);
+                b = (int)fb;
+            }
+//            Log.v("GREEN", i + " - " + r + " " + g + " " + b);
+            Log.v("BLUE", " - " + getHexString(r) + "" + getHexString(g) + "" + getHexString(b));
+        }
+
+    }
+
     private static String getHexString(int value) {
         String s = Integer.toString(value, 16);
         if(s.length() == 1){

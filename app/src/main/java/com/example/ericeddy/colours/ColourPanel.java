@@ -337,7 +337,21 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
         return cells;
     }
     public void setCells(int[][] newValue) {
-        cells = newValue;
+        if(newValue.length == cells.length && newValue[0].length == cells[0].length){
+            cells = newValue;
+        } else {
+            int[][] fixedData = new int[cells.length][cells[0].length];
+            for( int yCell = 0; yCell < yNumCells; yCell++ ){
+                if(yCell < newValue.length) {
+                    for(int xCell = 0; xCell < xNumCells; xCell++){
+                        if(xCell < newValue[0].length) {
+                            fixedData[yCell][xCell] = newValue[yCell][xCell];
+                        }
+                    }
+                }
+            }
+            cells = fixedData;
+        }
     }
 
     public int[][] getCellsCopy() {
