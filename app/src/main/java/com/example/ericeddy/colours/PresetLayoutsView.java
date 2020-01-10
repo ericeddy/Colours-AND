@@ -186,7 +186,7 @@ public class PresetLayoutsView extends DialogView {
                 int dX = ( isOverHalfX ? diffX : x);
                 int dY = (( isOverHalfY ? diffY : y ) );
                 int dZ = (dY < dX ? dY : dX);
-                colorVal = dZ > 4 ? colorLength - 2 : dZ;
+                colorVal = dZ > 4 ? colorLength - 16 : dZ - 6;
                 colorVal = colorLength - colorVal;
 
                 if(colorVal >= colorLength) {

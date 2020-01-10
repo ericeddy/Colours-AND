@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 
 public class MainActivity extends AppCompatActivity  {
@@ -263,5 +264,24 @@ public class MainActivity extends AppCompatActivity  {
             mainActivity.panel.setCells(data);
 
         }
+    }
+
+    public static void colorPanelSizeUpdated() {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null) {
+            mainActivity.updateSettingsBarSize();
+        }
+
+    }
+
+    private void updateSettingsBarSize() {
+        RelativeLayout root = findViewById(R.id.root);
+        int screenHeight = root.getMeasuredHeight();
+        int colorPanelHeight = panel.cellSize * panel.yNumCells;
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)settingsBar.getLayoutParams();
+        lp.height = screenHeight - colorPanelHeight;
+        settingsBar.setLayoutParams(lp);
+        settingsBar.requestLayout();
+        settingsBar.updateBackgroundGradient();
     }
 }

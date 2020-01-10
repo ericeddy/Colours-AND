@@ -307,4 +307,8 @@
     <color name="colorPrimary">#800080</color>
     <color name="colorPrimaryDark">#610062</color>
     <color name="colorAccent">#EA00E9</color>
+
+    <color name="setting_bar_1">#cf6dff</color>
+    <color name="setting_bar_2">#db95ff</color>
+    <color name="setting_bar_3">#f2d8ff</color>
 </resources>

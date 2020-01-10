@@ -22,7 +22,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
     private LoopThread thread;
     private int[] colours;
     private int[][] cells;
-    private int cellSize = 0;
+    public int cellSize = 0;
     public int xNumCells = 28;
     public int yNumCells = 0;
 
@@ -316,6 +316,8 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
 
         cells = new int[yNumCells][xNumCells];
         needsDraw = true;
+
+        MainActivity.colorPanelSizeUpdated();
     }
     public void resetCells() {
         memory.clear();

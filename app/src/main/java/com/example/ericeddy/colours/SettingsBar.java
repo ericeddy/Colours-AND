@@ -1,6 +1,12 @@
 package com.example.ericeddy.colours;
 
 import android.content.Context;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.PaintDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
@@ -37,6 +43,7 @@ public class SettingsBar extends RelativeLayout {
 
     protected LinearLayout controlsButtonsSection;
     protected RelativeLayout controlsSectionBtn;
+    protected TextView controlsButtonTitle;
     private ImageView controlsPauseImage;
     private ImageView controlsPlayImage;
     protected RelativeLayout controlsRewindBtn;
@@ -48,7 +55,7 @@ public class SettingsBar extends RelativeLayout {
     protected TextView controlsSpeedDisplay;
 
     protected LinearLayout themeButtonsSection;
-    protected RelativeLayout themeSectionBtn;
+//    protected RelativeLayout themeSectionBtn;
     protected RelativeLayout themeColorBtn;
     protected RelativeLayout themePresetsBtn;
     protected RelativeLayout themeSaveBtn;
@@ -114,6 +121,7 @@ public class SettingsBar extends RelativeLayout {
 
         controlsButtonsSection = findViewById(R.id.controls_buttons);
         controlsSectionBtn = findViewById(R.id.controls_main_btn);
+        controlsButtonTitle = findViewById(R.id.controls_main_btn_title);
 
         controlsRewindBtn = findViewById(R.id.controls_rewind_btn);
         controlsSpeedDecreaseBtn = findViewById(R.id.speed_small_icon);
@@ -127,7 +135,7 @@ public class SettingsBar extends RelativeLayout {
         controlsForwardSelected = findViewById(R.id.controls_forwards_btn_selected);
 
         themeButtonsSection = findViewById(R.id.themes_buttons);
-        themeSectionBtn = findViewById(R.id.themes_main_btn);
+//        themeSectionBtn = findViewById(R.id.themes_main_btn);
 
         themeColorBtn = findViewById(R.id.themes_color_btn);
         themePresetsBtn = findViewById(R.id.themes_presets_btn);
@@ -147,15 +155,15 @@ public class SettingsBar extends RelativeLayout {
                                                       @Override
                                                       public boolean onLongClick(View v) { controlSectionButtonAction(); return true; }
                                                   });
-        themeSectionBtn.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) { themeSectionButtonAction();
-                    }
-                });
-        themeSectionBtn.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) { themePresetsAction(); return true; }
-        });
+//        themeSectionBtn.setOnClickListener(new OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) { themeSectionButtonAction();
+//                    }
+//                });
+//        themeSectionBtn.setOnLongClickListener(new OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) { themePresetsAction(); return true; }
+//        });
 
         brushSelectColorBtn.setOnClickListener(new OnClickListener() {
             @Override
@@ -226,6 +234,9 @@ public class SettingsBar extends RelativeLayout {
         String displaySpeedText = String.format("%.2f", speed) + "x";
         controlsSpeedDisplay.setText(displaySpeedText);
 
+        String playPause = !isPlaying ? "Play" : "Pause";
+        controlsButtonTitle.setText(playPause);
+
         brushDefaultSelected.setVisibility( brushType == 0 ? View.VISIBLE : View.GONE );
         brushInvertSelected.setVisibility( brushType == 1 ?  View.VISIBLE : View.GONE );
         brushSelectColorSelected.setVisibility( brushType == 2 ? View.VISIBLE : View.GONE );
@@ -236,35 +247,35 @@ public class SettingsBar extends RelativeLayout {
         controlsForwardSelected.setVisibility( isPlayingForwards ? View.VISIBLE : View.GONE);
         controlsRewindSelected.setVisibility( isPlayingForwards ? View.GONE : View.VISIBLE);
 
-        if(modeChanged){
-            if( mode == 0 ){
-                goneIfNeeded(controlsButtonsSection);
-                goneIfNeeded(themeButtonsSection);
-
-                visibleIfNeeded(brushButtonsSection);
-                goneIfNeeded(brushSectionBtn);
-                visibleIfNeeded(themeSectionBtn);
-
-            } else if( mode == 1 ) {
-                goneIfNeeded(brushButtonsSection);
-                goneIfNeeded(themeButtonsSection);
-
-                visibleIfNeeded(controlsButtonsSection);
-
-                visibleIfNeeded(brushSectionBtn);
-                visibleIfNeeded(themeSectionBtn);
-
-            } else if( mode == 2 ) {
-                goneIfNeeded(brushButtonsSection);
-                goneIfNeeded(controlsButtonsSection);
-
-                visibleIfNeeded(themeButtonsSection);
-                goneIfNeeded(themeSectionBtn);
-
-                visibleIfNeeded(brushSectionBtn);
-            }
-            modeChanged = false;
-        }
+//        if(modeChanged){
+//            if( mode == 0 ){
+//                goneIfNeeded(controlsButtonsSection);
+//                goneIfNeeded(themeButtonsSection);
+//
+//                visibleIfNeeded(brushButtonsSection);
+//                goneIfNeeded(brushSectionBtn);
+//                visibleIfNeeded(themeSectionBtn);
+//
+//            } else if( mode == 1 ) {
+//                goneIfNeeded(brushButtonsSection);
+//                goneIfNeeded(themeButtonsSection);
+//
+//                visibleIfNeeded(controlsButtonsSection);
+//
+//                visibleIfNeeded(brushSectionBtn);
+//                visibleIfNeeded(themeSectionBtn);
+//
+//            } else if( mode == 2 ) {
+//                goneIfNeeded(brushButtonsSection);
+//                goneIfNeeded(controlsButtonsSection);
+//
+//                visibleIfNeeded(themeButtonsSection);
+//                goneIfNeeded(themeSectionBtn);
+//
+//                visibleIfNeeded(brushSectionBtn);
+//            }
+//            modeChanged = false;
+//        }
     }
 
     private void brushSectionButtonAction() {
@@ -417,6 +428,40 @@ public class SettingsBar extends RelativeLayout {
         }
     }
 
+    public void updateBackgroundGradient() {
+        final int[] colors = new int[] {
+                Helper.getContextColor(R.color.setting_bar_1),
+                Helper.getContextColor(R.color.setting_bar_2),
+                Helper.getContextColor(R.color.setting_bar_3)
+        };
+
+        final float[] positions = new float[] {
+                0, 0.10f, 1f
+        };
+//        LinearGradient lg = new LinearGradient(0, 0, rootView.getMeasuredWidth(), rootView.getMeasuredHeight(), colors, positions, Shader.TileMode.REPEAT);
+        ShapeDrawable.ShaderFactory shaderFactory = new ShapeDrawable.ShaderFactory() {
+            @Override
+            public Shader resize(int width, int height) {
+                float angleInRadians = (float)Math.toRadians(90);
+
+                float endX = (float)Math.cos(angleInRadians) * width;
+                float endY = (float)Math.sin(angleInRadians) * height;
+
+                LinearGradient linearGradient = new LinearGradient(0, 0, endX, endY,
+                        colors,
+                        positions,
+                        Shader.TileMode.REPEAT);
+                return linearGradient;
+            }
+        };
+
+        PaintDrawable paint = new PaintDrawable();
+        paint.setShape(new RectShape());
+        paint.setShaderFactory(shaderFactory);
+
+        rootView.setBackground(paint);
+    }
+
     class OnLongTouchRepeater implements OnTouchListener {
 
         Handler timerHandler = new Handler();
@@ -452,6 +497,8 @@ public class SettingsBar extends RelativeLayout {
 //                    finished = true;
 //                }
             } else if(event.getAction() == MotionEvent.ACTION_UP) {
+                finished = true;
+            } else if(event.getAction() == MotionEvent.ACTION_CANCEL){
                 finished = true;
             }
             return true;
