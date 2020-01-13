@@ -149,6 +149,14 @@ public class Helper {
                 R.color.blue_rainbow_81, R.color.blue_rainbow_82, R.color.blue_rainbow_83, R.color.blue_rainbow_84 };
         return lightRainbowRes;
     }
+    public static int[] getBtnColors() {
+        int[] res = {
+                R.color.grey_2,R.color.grey_4,R.color.grey_6,R.color.grey_8,
+                R.color.grey_a,R.color.grey_c,R.color.grey_d,R.color.grey_b,
+                R.color.grey_9,R.color.grey_7,R.color.grey_5,R.color.grey_3
+        };
+        return res;
+    }
 
     public static void printGreenColors() {
         int sr = 0; int sg = 245; int sb = 0;

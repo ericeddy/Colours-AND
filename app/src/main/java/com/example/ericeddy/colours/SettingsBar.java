@@ -14,6 +14,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,11 +24,12 @@ import java.util.Timer;
 
 public class SettingsBar extends RelativeLayout {
 
-    private int MAX_TOUCH_SIZE = 12;
+    public static int MAX_TOUCH_SIZE = 12;
 
     protected Context mContext;
 
     protected RelativeLayout rootView;
+    protected HorizontalScrollView scroll;
 
     protected LinearLayout brushButtonsSection;
     protected RelativeLayout brushSectionBtn;
@@ -40,6 +42,7 @@ public class SettingsBar extends RelativeLayout {
     protected ImageView brushSizeDecreaseBtn;
     protected ImageView brushSizeIncreaseBtn;
     protected TextView brushSizeDisplay;
+    protected LinearLayout brushSizeLayout;
 
     protected LinearLayout controlsButtonsSection;
     protected RelativeLayout controlsSectionBtn;
@@ -53,6 +56,7 @@ public class SettingsBar extends RelativeLayout {
     protected ImageView controlsSpeedIncreaseBtn;
     protected ImageView controlsSpeedDecreaseBtn;
     protected TextView controlsSpeedDisplay;
+    private LinearLayout controlsSpeedLayout;
 
     protected LinearLayout themeButtonsSection;
 //    protected RelativeLayout themeSectionBtn;
@@ -60,6 +64,7 @@ public class SettingsBar extends RelativeLayout {
     protected RelativeLayout themePresetsBtn;
     protected RelativeLayout themeSaveBtn;
     protected RelativeLayout themeLoadBtn;
+    protected RelativeLayout imageLoadBtn;
     protected RelativeLayout themeClearBtn;
 
 
@@ -104,6 +109,7 @@ public class SettingsBar extends RelativeLayout {
         inflater.inflate(R.layout.settings_bar_layout, this, true);
 
         rootView = findViewById(R.id.root_view);
+        scroll = findViewById(R.id.scroll);
 
         brushButtonsSection = findViewById(R.id.brushes_buttons);
         brushSectionBtn = findViewById(R.id.brushes_main_btn);
@@ -114,6 +120,7 @@ public class SettingsBar extends RelativeLayout {
         brushSizeDecreaseBtn = findViewById(R.id.size_small_icon);
         brushSizeIncreaseBtn = findViewById(R.id.size_large_icon);
         brushSizeDisplay = findViewById(R.id.size_content);
+        brushSizeLayout = findViewById(R.id.brush_size_layout);
 
         brushSelectColorSelected = findViewById(R.id.brushes_select_color_btn_selected);
         brushInvertSelected = findViewById(R.id.brushes_inverse_btn_selected);
@@ -130,6 +137,7 @@ public class SettingsBar extends RelativeLayout {
         controlsForwardBtn = findViewById(R.id.controls_forwards_btn);
         controlsPauseImage = findViewById(R.id.pause_button_image);
         controlsPlayImage = findViewById(R.id.play_button_image);
+        controlsSpeedLayout = findViewById(R.id.play_speed_layout);
 
         controlsRewindSelected = findViewById(R.id.controls_rewind_btn_selected);
         controlsForwardSelected = findViewById(R.id.controls_forwards_btn_selected);
@@ -141,6 +149,7 @@ public class SettingsBar extends RelativeLayout {
         themePresetsBtn = findViewById(R.id.themes_presets_btn);
         themeSaveBtn = findViewById(R.id.themes_save_btn);
         themeLoadBtn = findViewById(R.id.themes_load_btn);
+        imageLoadBtn = findViewById(R.id.themes_load_image_btn);
         themeClearBtn = findViewById(R.id.themes_clear_btn);
 
         brushSectionBtn.setOnClickListener(new OnClickListener() {
@@ -180,6 +189,12 @@ public class SettingsBar extends RelativeLayout {
         brushSizeIncreaseBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) { brushIncreaseSizeAction(); } });
+        brushSizeLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) { brushSizeLayoutAction(); } });
+        controlsSpeedLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) { playSpeedLayoutAction(); } });
 
         brushSizeDecreaseBtn.setOnTouchListener(new OnLongTouchRepeater(new Runnable() {
             @Override
@@ -214,6 +229,9 @@ public class SettingsBar extends RelativeLayout {
         themeLoadBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) { themeLoadAction(); } });
+        imageLoadBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) { imageLoadAction(); } });
         themeClearBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) { themeClearAction(); } });
@@ -330,6 +348,14 @@ public class SettingsBar extends RelativeLayout {
         }
     }
 
+    private void brushSizeLayoutAction() {
+        MainActivity.displayBrushSizeDialog();
+    }
+
+    private void playSpeedLayoutAction() {
+        MainActivity.displayPlaySpeedDialog();
+    }
+
     public void changeTouchSize(boolean increase) {
         touchSize = touchSize + ( increase ? 1 : -1 );
         PreferenceManager.setTouchSize(touchSize);
@@ -373,6 +399,7 @@ public class SettingsBar extends RelativeLayout {
     }
 
     public void speedChanged() {
+        speed = PreferenceManager.getPlayingSpeed();
         updateUI();
     }
 
@@ -402,6 +429,10 @@ public class SettingsBar extends RelativeLayout {
         MainActivity.displayLoadDialog();
     }
 
+    private void imageLoadAction() {
+        MainActivity.loadImageAction();
+    }
+
     private void themeClearAction() {
         MainActivity.clearTouched();
     }
@@ -429,6 +460,7 @@ public class SettingsBar extends RelativeLayout {
     }
 
     public void updateBackgroundGradient() {
+
         final int[] colors = new int[] {
                 Helper.getContextColor(R.color.setting_bar_1),
                 Helper.getContextColor(R.color.setting_bar_2),
@@ -460,6 +492,23 @@ public class SettingsBar extends RelativeLayout {
         paint.setShaderFactory(shaderFactory);
 
         rootView.setBackground(paint);
+    }
+
+    public int getPositionForBrushSize() {
+        return (int)(brushSizeLayout.getX() + Helper.convertDpToPixels(8)) - getScrollPosition() + (int)(brushSizeLayout.getMeasuredWidth() * 0.5);
+    }
+
+    public int getPositionForPlaySpeed() {
+        return (int)(controlsSpeedLayout.getX() + controlsButtonsSection.getX()) - getScrollPosition() + (int)(controlsSpeedLayout.getMeasuredWidth() * 0.5);
+    }
+    public int getScrollPosition(){
+        return scroll.getScrollX();
+    }
+
+    // FOR USE BY EXTERNAL SETTING OF SIZE
+    public void touchSizeChanged() {
+        touchSize = PreferenceManager.getTouchSize();
+        updateUI();
     }
 
     class OnLongTouchRepeater implements OnTouchListener {

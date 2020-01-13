@@ -5,6 +5,7 @@
     android:background="@drawable/background_settings_bar">
 
     <HorizontalScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
@@ -50,7 +51,7 @@
 
                     <RelativeLayout
                         android:id="@+id/brushes_select_color_btn"
-                        android:layout_width="48dp"
+                        android:layout_width="@dimen/button_width"
                         android:layout_height="match_parent">
                         <LinearLayout
                             android:id="@+id/brushes_select_color_btn_layout"
@@ -81,7 +82,7 @@
 
                     <RelativeLayout
                         android:id="@+id/brushes_inverse_btn"
-                        android:layout_width="48dp"
+                        android:layout_width="@dimen/button_width"
                         android:layout_height="match_parent">
                         <LinearLayout
                             android:id="@+id/brushes_inverse_btn_layout"
@@ -112,7 +113,7 @@
 
                     <RelativeLayout
                         android:id="@+id/brushes_default_btn"
-                        android:layout_width="48dp"
+                        android:layout_width="@dimen/button_width"
                         android:layout_height="match_parent">
                         <LinearLayout
                             android:id="@+id/brushes_default_btn_layout"
@@ -142,13 +143,16 @@
                     </RelativeLayout>
 
                     <LinearLayout
+                        android:id="@+id/brush_size_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
                         android:orientation="vertical"
                         android:layout_gravity="center_vertical">
 
                         <RelativeLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="28dp">
 
                             <ImageView
@@ -156,7 +160,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
-                                android:src="@drawable/ic_expand_more_black_24dp"/>
+                                android:src="@drawable/ic_expand_more_black_24dp"
+                                android:visibility="gone"/>
 
                             <ImageView
                                 android:id="@+id/size_large_icon"
@@ -164,6 +169,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_toEndOf="@+id/size_content_layout"
                                 android:src="@drawable/ic_expand_less_black_24dp"
+                                android:visibility="gone"
                                 android:layout_centerVertical="true"/>
 
                             <RelativeLayout
@@ -211,10 +217,10 @@
 
             <!-- Controls -->
             <LinearLayout
+                android:id="@+id/controls_buttons"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
                 <LinearLayout
-                    android:id="@+id/controls_buttons"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
@@ -222,7 +228,7 @@
 
                     <RelativeLayout
                         android:id="@+id/controls_rewind_btn"
-                        android:layout_width="48dp"
+                        android:layout_width="@dimen/button_width"
                         android:layout_height="match_parent">
                         <LinearLayout
                             android:id="@+id/controls_rewind_btn_layout"
@@ -253,7 +259,7 @@
 
                     <RelativeLayout
                         android:id="@+id/controls_main_btn"
-                        android:layout_width="48dp"
+                        android:layout_width="@dimen/button_width"
                         android:layout_height="match_parent">
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -289,7 +295,7 @@
 
                     <RelativeLayout
                         android:id="@+id/controls_forwards_btn"
-                        android:layout_width="48dp"
+                        android:layout_width="@dimen/button_width"
                         android:layout_height="match_parent">
                         <LinearLayout
                             android:id="@+id/controls_forwards_btn_layout"
@@ -319,26 +325,32 @@
                     </RelativeLayout>
 
                     <LinearLayout
+                        android:id="@+id/play_speed_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
                         android:layout_gravity="center_vertical">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="28dp">
+                            android:layout_height="28dp"
+                            android:layout_gravity="center_horizontal">
 
                             <ImageView
                                 android:id="@+id/speed_small_icon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
+                                android:visibility="gone"
                                 android:src="@drawable/ic_expand_more_black_24dp"/>
 
                             <ImageView
                                 android:id="@+id/speed_large_icon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:visibility="gone"
                                 android:layout_toEndOf="@+id/speed_content_layout"
                                 android:src="@drawable/ic_expand_less_black_24dp"
                                 android:layout_centerVertical="true"/>
@@ -417,7 +429,7 @@
 
                     <RelativeLayout
                         android:id="@+id/themes_color_btn"
-                        android:layout_width="48dp"
+                        android:layout_width="@dimen/button_width"
                         android:layout_height="match_parent">
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -438,7 +450,7 @@
                     </RelativeLayout>
                     <RelativeLayout
                         android:id="@+id/themes_presets_btn"
-                        android:layout_width="48dp"
+                        android:layout_width="@dimen/button_width"
                         android:layout_height="match_parent">
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -454,12 +466,12 @@
                                 android:textSize="12sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Presets"/>
+                                android:text="Templates"/>
                         </LinearLayout>
                     </RelativeLayout>
                     <RelativeLayout
                         android:id="@+id/themes_save_btn"
-                        android:layout_width="48dp"
+                        android:layout_width="@dimen/button_width"
                         android:layout_height="match_parent">
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -480,7 +492,7 @@
                     </RelativeLayout>
                     <RelativeLayout
                         android:id="@+id/themes_load_btn"
-                        android:layout_width="48dp"
+                        android:layout_width="@dimen/button_width"
                         android:layout_height="match_parent">
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -500,8 +512,29 @@
                         </LinearLayout>
                     </RelativeLayout>
                     <RelativeLayout
+                        android:id="@+id/themes_load_image_btn"
+                        android:layout_width="@dimen/button_width"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center_horizontal"
+                            android:layout_centerInParent="true">
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/ic_photo_library_black_24dp"/>
+                            <TextView
+                                android:textSize="12sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Image"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:id="@+id/themes_clear_btn"
-                        android:layout_width="48dp"
+                        android:layout_width="@dimen/button_width"
                         android:layout_height="match_parent">
                         <LinearLayout
                             android:layout_width="wrap_content"

@@ -17,6 +17,8 @@
     <color name="grey_e">#eeeeee</color>
     <color name="white">#ffffff</color>
 
+    <color name="selected_highlight">#88FFFFFF</color>
+
     <color name="overlay">#88222222</color>
 
     <!-- For the inbetween colours -->

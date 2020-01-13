@@ -1,6 +1,13 @@
 package com.example.ericeddy.colours;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -10,7 +17,7 @@ import android.widget.RelativeLayout;
 public class PresetLayoutsView extends DialogView {
 
     public ColourPanel panel;
-
+    private Matrix matrix = new Matrix();
     private int colorLength;
 
     private View button1;
@@ -51,107 +58,165 @@ public class PresetLayoutsView extends DialogView {
         button4 = findViewById(R.id.preset_4);
         button5 = findViewById(R.id.preset_5);
 
+        button1.setBackground(getButtonBitmap(0));
+        button2.setBackground(getButtonBitmap(1));
+        button3.setBackground(getButtonBitmap(2));
+        button4.setBackground(getButtonBitmap(3));
+        button5.setBackground(getButtonBitmap(4));
+
         button1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                preset1();
+                selectPreset(0);
             }
         });
         button2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                preset2();
+                selectPreset(1);
             }
         });
         button3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                preset3();
+                selectPreset(2);
             }
         });
         button4.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                preset4();
+                selectPreset(3);
             }
         });
         button5.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                preset5();
+                selectPreset(4);
             }
         });
     }
 
-    public void preset1() {
+    public Drawable getButtonBitmap(int button) {
+        int bitmapSize = Helper.convertDpToPixels(60);
+        Bitmap bmp = Bitmap.createBitmap(bitmapSize, bitmapSize, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bmp);
+        int[] colours = Helper.getBtnColors();
+        int[][] cells = null;
+        if(button == 0){
+            cells = preset1(20, 20, 12);
+        } else if(button == 1){
+            cells = preset2(20, 20, 12);
+        } else if(button == 2){
+            cells = preset3(20, 20, 12);
+        } else if(button == 3){
+            cells = preset4(20, 20, 12);
+        } else if(button == 4){
+            cells = preset5(20, 20, 12);
+        }
+        int gridSize = bitmapSize / 20;
+        for(int y = 0; y < cells.length; y++) {
+            for(int x = 0; x < cells.length; x++){
+                Paint p = new Paint();
+                int cellValue = cells[y][x];
+                p.setColor(Helper.getContextColor( colours[cellValue] ));
+                Rect currentRect = new Rect(x * gridSize, y * gridSize, (x * gridSize) + gridSize, (y * gridSize) + gridSize);
+                canvas.drawRect(currentRect, p);
+            }
+        }
+//        canvas.drawBitmap(bmp, matrix, null);
+        Drawable d = new BitmapDrawable(getResources(), bmp);
+        return d;
+    }
+
+    public void selectPreset(int preset) {
+        int[][] cells = null;
+        if(preset == 0){
+            cells = preset1(panel.yNumCells, panel.xNumCells, colorLength);
+        } else if(preset == 1){
+            cells = preset2(panel.yNumCells, panel.xNumCells, colorLength);
+        } else if(preset == 2){
+            cells = preset3(panel.yNumCells, panel.xNumCells, colorLength);
+        } else if(preset == 3){
+            cells = preset4(panel.yNumCells, panel.xNumCells, colorLength);
+        } else if(preset == 4){
+            cells = preset5(panel.yNumCells, panel.xNumCells, colorLength);
+        }
+        if(cells != null){
+            setCells(cells);
+        }
+    }
+    public int[][] preset1(int yCell, int xCell, int length) {
         // Vertical bars
-        int[][] cells = new int[panel.yNumCells][panel.xNumCells];
+//        int yCell = panel.yNumCells;
+//        int xCell = panel.xNumCells;
+//        int length = colorLength;
+        int[][] cells = new int[yCell][xCell];
         int x; int y; int xMod = 0; int yMod = 0;
-        for (y = 0; y < panel.yNumCells; y++) {
+        for (y = 0; y < yCell; y++) {
             xMod = 0;
-            for (x = 0; x < panel.xNumCells; x++) {
+            for (x = 0; x < xCell; x++) {
                 cells[y][x] = xMod;
                 xMod = xMod + 1;
-                if(xMod >= colorLength){
+                if(xMod >= length){
                     xMod = 0;
                 }
             }
         }
-        setCells(cells);
+        return cells;
     }
 
-    public void preset2() {
+    public int[][] preset2(int yCell, int xCell, int length) {
         // Horizontal bars
-        int[][] cells = new int[panel.yNumCells][panel.xNumCells];
+        int[][] cells = new int[yCell][xCell];
         int x; int y; int xMod = 0; int yMod = 0;
-        for (y = 0; y < panel.yNumCells; y++) {
-            for (x = 0; x < panel.xNumCells; x++) {
+        for (y = 0; y < yCell; y++) {
+            for (x = 0; x < xCell; x++) {
                 cells[y][x] = yMod;
             }
             yMod = yMod + 1;
-            if(yMod >= colorLength){
+            if(yMod >= length){
                 yMod = 0;
             }
         }
-        setCells(cells);
+        return cells;// setCells(cells);
 
     }
-    public void preset3() {
-        int[][] cells = new int[panel.yNumCells][panel.xNumCells];
+    public int[][] preset3(int yCell, int xCell, int length) {
+        int[][] cells = new int[yCell][xCell];
         int x; int y; int xMod = 0; int yMod = 0; int zMod = 0;
-        for (y = 0; y < panel.yNumCells; y++) {
+        for (y = 0; y < yCell; y++) {
             xMod = 0;
-            for (x = 0; x < panel.xNumCells; x++) {
+            for (x = 0; x < xCell; x++) {
                 xMod = xMod + 1;
-                if(xMod >= colorLength){
+                if(xMod >= length){
                     xMod = 0;
                 }
                 zMod = xMod + yMod;
-                if(zMod >= colorLength){
-                    zMod = zMod % colorLength;
+                if(zMod >= length){
+                    zMod = zMod % length;
                 }
                 cells[y][x] = zMod;
             }
             yMod = yMod + 1;
-            if(yMod >= colorLength){
+            if(yMod >= length){
                 yMod = 0;
             }
         }
-        setCells(cells);
+        return cells;
     }
-    public void preset4() {
-        int[][] cells = new int[panel.yNumCells][panel.xNumCells];
+    public int[][] preset4(int yCell, int xCell, int length) {
+        int[][] cells = new int[yCell][xCell];
         int x; int y; int colorVal; int diffX; int diffY;
         //bars // middle square // bars
-        int startYSquare = ( panel.yNumCells - panel.xNumCells ) / 2;
-        int bottomBarsStart = panel.yNumCells - startYSquare;
+        int startYSquare = ( yCell - xCell ) / 2;
+        int bottomBarsStart = yCell - startYSquare;
         boolean isOverHalfY = false; boolean isOverHalfX = false;
-        for (y = 0; y < panel.yNumCells; y++) {
-            diffY = panel.yNumCells - y;
-            isOverHalfY = y >= ( panel.yNumCells / 2 );
-            for (x = 0; x < panel.xNumCells; x++) {
-                diffX = panel.xNumCells - x - 1;
-                isOverHalfX = x >= ( panel.xNumCells / 2 );
+        for (y = 0; y < yCell; y++) {
+            diffY = yCell - y - 1;
+            isOverHalfY = y >= ( yCell / 2 );
+            for (x = 0; x < xCell; x++) {
+                diffX = xCell - x - 1;
+                isOverHalfX = x >= ( xCell / 2 );
                 if(y < startYSquare){
                     colorVal = y;
                 } else if (y > bottomBarsStart) {
@@ -161,42 +226,44 @@ public class PresetLayoutsView extends DialogView {
                     int dY = (( isOverHalfY ? diffY : y ) );
                     colorVal = dY - startYSquare < dX ? dY : dX + startYSquare;
                 }
-                if(colorVal >= colorLength) {
-                    colorVal = colorVal % colorLength;
+                if(colorVal >= length) {
+                    colorVal = colorVal % length;
                 }
                 cells[y][x] = colorVal;
             }
         }
-        setCells(cells);
+        return cells;
     }
-    public void preset5() {
-        int[][] cells = new int[panel.yNumCells][panel.xNumCells];
+    public int[][] preset5(int yCell, int xCell, int length) {
+        int[][] cells = new int[yCell][xCell];
         int x; int y; int colorVal; int diffX; int diffY;
         //bars // middle square // bars
 //        int startYSquare = ( panel.yNumCells - panel.xNumCells ) / 2;
 //        int bottomBarsStart = panel.yNumCells - startYSquare;
         boolean isOverHalfY = false; boolean isOverHalfX = false;
-        for (y = 0; y < panel.yNumCells; y++) {
-            diffY = panel.yNumCells - y;
-            isOverHalfY = y > ( panel.yNumCells / 2 );
-            for (x = 0; x < panel.xNumCells; x++) {
-                diffX = panel.xNumCells - x;
-                isOverHalfX = x >= ( panel.xNumCells / 2 );
+        for (y = 0; y < yCell; y++) {
+            diffY = yCell - y - 1;
+            isOverHalfY = y > ( yCell / 2 );
+            for (x = 0; x < xCell; x++) {
+                diffX = xCell - x - 1;
+                isOverHalfX = x >= ( xCell / 2 );
 
                 int dX = ( isOverHalfX ? diffX : x);
                 int dY = (( isOverHalfY ? diffY : y ) );
                 int dZ = (dY < dX ? dY : dX);
-                colorVal = dZ > 4 ? colorLength - 16 : dZ - 6;
-                colorVal = colorLength - colorVal;
+                colorVal = dZ > 4 ? length - 16 : dZ - 6;
+                colorVal = length - colorVal;
 
-                if(colorVal >= colorLength) {
-                    colorVal = colorVal % colorLength;
+                if(colorVal >= length) {
+                    colorVal = colorVal % length;
                 }
                 cells[y][x] = colorVal;
             }
         }
-        setCells(cells);
+        return cells;
     }
+
+
 
     private void setCells(int[][] cells) {
         panel.addMemoryState();

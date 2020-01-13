@@ -69,6 +69,22 @@
         android:clickable="false">
 
     </com.example.ericeddy.colours.SelectThemeDialog>
+    <com.example.ericeddy.colours.BrushSizeDialog
+        android:id="@+id/brush_size_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:clickable="false">
+
+    </com.example.ericeddy.colours.BrushSizeDialog>
+    <com.example.ericeddy.colours.PlaySpeedDialog
+        android:id="@+id/play_speed_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:clickable="false">
+
+    </com.example.ericeddy.colours.PlaySpeedDialog>
     <com.example.ericeddy.colours.AreYouSureDialog
         android:id="@+id/are_you_sure_dialog"
         android:layout_width="match_parent"

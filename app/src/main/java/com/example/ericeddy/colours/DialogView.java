@@ -2,6 +2,11 @@ package com.example.ericeddy.colours;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.drawable.PaintDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -53,6 +58,7 @@ public class DialogView extends RelativeLayout {
 
             }
         });
+        updateBackgroundGradient();
     }
 
     public void displayDialog() {
@@ -65,4 +71,41 @@ public class DialogView extends RelativeLayout {
         rootView.setVisibility(View.GONE);
     }
 
+
+    public void updateBackgroundGradient() {
+        final int[] colors = new int[] {
+                Helper.getContextColor(R.color.setting_bar_1),
+                Helper.getContextColor(R.color.setting_bar_2),
+                Helper.getContextColor(R.color.setting_bar_2),
+                Helper.getContextColor(R.color.setting_bar_1)
+        };
+
+        final float[] positions = new float[] {
+                0, 0.08f, 0.92f, 1f
+        };
+//        LinearGradient lg = new LinearGradient(0, 0, rootView.getMeasuredWidth(), rootView.getMeasuredHeight(), colors, positions, Shader.TileMode.REPEAT);
+        ShapeDrawable.ShaderFactory shaderFactory = new ShapeDrawable.ShaderFactory() {
+            @Override
+            public Shader resize(int width, int height) {
+                float angleInRadians = (float)Math.toRadians(90);
+
+                float endX = (float)Math.cos(angleInRadians) * width;
+                float endY = (float)Math.sin(angleInRadians) * height;
+
+                LinearGradient linearGradient = new LinearGradient(0, 0, endX, endY,
+                        colors,
+                        positions,
+                        Shader.TileMode.REPEAT);
+                return linearGradient;
+            }
+        };
+
+        PaintDrawable paint = new PaintDrawable();
+        paint.setShape(new RectShape());
+        paint.setShaderFactory(shaderFactory);
+        paint.setCornerRadius(Helper.convertDpToPixels(8));
+
+        RelativeLayout mainViewBG = findViewById(R.id.view_background);
+        mainViewBG.setBackground(paint);
+    }
 }
