@@ -23,7 +23,7 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
     private int[] colours;
     private int[][] cells;
     public int cellSize = 0;
-    public int xNumCells = 28;
+    public int xNumCells = 36;
     public int yNumCells = 0;
 
     private int currentCellX = -1;

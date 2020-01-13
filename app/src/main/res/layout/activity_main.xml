@@ -85,6 +85,14 @@
         android:clickable="false">
 
     </com.example.ericeddy.colours.PlaySpeedDialog>
+    <com.example.ericeddy.colours.ImageLoadDialog
+        android:id="@+id/image_load_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:clickable="false">
+
+    </com.example.ericeddy.colours.ImageLoadDialog>
     <com.example.ericeddy.colours.AreYouSureDialog
         android:id="@+id/are_you_sure_dialog"
         android:layout_width="match_parent"

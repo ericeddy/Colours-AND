@@ -58,8 +58,9 @@ public class MainActivity extends AppCompatActivity  {
     private SelectThemeDialog selectThemeDialog;
     private BrushSizeDialog brushSizeDialog;
     private PlaySpeedDialog playSpeedDialog;
+    private ImageLoadDialog imageLoadDialog;
 
-    private ColourPanel panel;
+    public ColourPanel panel;
     private int[][] pausedCells;
 
     @Override
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity  {
         selectThemeDialog = findViewById(R.id.theme_dialog);
         brushSizeDialog = findViewById(R.id.brush_size_dialog);
         playSpeedDialog = findViewById(R.id.play_speed_dialog);
+        imageLoadDialog = findViewById(R.id.image_load_dialog);
 
         areYouSureDialog = findViewById(R.id.are_you_sure_dialog);
 
@@ -417,13 +419,7 @@ public class MainActivity extends AppCompatActivity  {
                 try {
 //                    Bitmap bmp = getBitmapFromUri(selectedImage);
                     Bitmap bmp = handleSamplingAndRotationBitmap(this, selectedImage);
-
-
-                    ImageView view = new ImageView(this);
-                    view.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
-                    view.setImageBitmap(bmp);
-                    RelativeLayout rootView = findViewById(R.id.root);
-                    rootView.addView(view);
+                    imageLoadDialog.displayDialog(panel.myCanvas_w, panel.myCanvas_h, bmp);
 
                     panel.MyGameSurfaceView_OnResume();
                 } catch (FileNotFoundException e) {

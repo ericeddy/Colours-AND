@@ -70,6 +70,7 @@ public class SaveDialog extends DialogView {
         super.displayDialog();
         fileName.setText("Untitled");
         fileName.requestFocus();
+        fileName.setSelectAllOnFocus(true);
         InputMethodManager inputMethodManager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
