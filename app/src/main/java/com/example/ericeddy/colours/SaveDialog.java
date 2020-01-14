@@ -66,8 +66,8 @@ public class SaveDialog extends DialogView {
     }
 
     @Override
-    public void displayDialog() {
-        super.displayDialog();
+    public void displayDialog(RelativeLayout relativeLayout) {
+        super.displayDialog(relativeLayout);
         fileName.setText("Untitled");
         fileName.requestFocus();
         fileName.setSelectAllOnFocus(true);

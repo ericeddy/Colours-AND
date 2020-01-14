@@ -5,7 +5,6 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -96,8 +95,8 @@ public class SelectColorDialog extends DialogView {
     }
 
     @Override
-    public void displayDialog() {
-        super.displayDialog();
+    public void displayDialog(RelativeLayout relativeLayout) {
+        super.displayDialog(relativeLayout);
 
         Helper.printBlueColors();
 

@@ -1,6 +1,5 @@
 package com.example.ericeddy.colours;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -10,7 +9,7 @@ import android.graphics.drawable.shapes.RectShape;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 public class DialogView extends RelativeLayout {
@@ -61,14 +60,16 @@ public class DialogView extends RelativeLayout {
         updateBackgroundGradient();
     }
 
-    public void displayDialog() {
+    public void displayDialog(RelativeLayout relativeLayout) {
         // Do animate in //
         rootView.setVisibility(View.VISIBLE);
+        relativeLayout.addView(this);
     }
 
     public void closeDialog() {
         // Do Animate Out //
         rootView.setVisibility(View.GONE);
+        ((ViewGroup)getParent()).removeView(this);
     }
 
 

@@ -28,13 +28,66 @@
             android:id="@+id/buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <RelativeLayout
+                    android:id="@+id/original_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_btn">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:layout_centerInParent="true"
+                        android:text="Original"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/tone_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/background_btn">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:layout_centerInParent="true"
+                        android:text="By Tone"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/hue_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/background_btn">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:layout_centerInParent="true"
+                        android:text="By Hue"/>
+                </RelativeLayout>
+            </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/tone_btn"
-                android:layout_width="0dp"
+                android:id="@+id/apply_btn"
+                android:layout_width="match_parent"
                 android:layout_height="32dp"
-                android:layout_weight="1"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/background_btn">
                 <TextView
                     android:layout_width="wrap_content"
@@ -43,23 +96,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/white"
                     android:layout_centerInParent="true"
-                    android:text="By Tone"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/hue_btn"
-                android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/background_btn">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
-                    android:textSize="16sp"
-                    android:textColor="@color/white"
-                    android:layout_centerInParent="true"
-                    android:text="By Hue"/>
+                    android:text="Apply"/>
             </RelativeLayout>
         </LinearLayout>
 

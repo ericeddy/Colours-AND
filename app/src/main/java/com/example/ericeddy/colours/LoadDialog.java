@@ -11,13 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.util.List;
 
 public class LoadDialog extends DialogView {
 
@@ -216,8 +213,8 @@ public class LoadDialog extends DialogView {
     }
 
     @Override
-    public void displayDialog() {
-        super.displayDialog();
+    public void displayDialog(RelativeLayout relativeLayout) {
+        super.displayDialog(relativeLayout);
         Cursor cursor = dbManager.fetch();
         adapter = new LoadedDesignAdapter(cursor);
         adapter.notifyDataSetChanged();

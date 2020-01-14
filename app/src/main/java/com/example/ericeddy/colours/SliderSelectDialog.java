@@ -100,7 +100,7 @@ public class SliderSelectDialog extends DialogView {
 
     }
 
-    public void displayDialog(int position) {
+    public void displayDialog(RelativeLayout root, int position) {
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams)mainViewBG.getLayoutParams();
         int trackWidth = Helper.convertDpToPixels(60);
         int newPos = position - (int)(trackWidth * 0.5);
@@ -113,7 +113,7 @@ public class SliderSelectDialog extends DialogView {
         lp.setMarginStart(newPos);
         mainViewBG.setLayoutParams(lp);
         setInitPosition();
-        displayDialog();
+        displayDialog(root);
     }
 
     public void setDialogBottom(int bottom) {

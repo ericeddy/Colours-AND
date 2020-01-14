@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class SettingsView extends DialogView {
@@ -109,8 +110,8 @@ public class SettingsView extends DialogView {
     }
 
     @Override
-    public void displayDialog() {
-        super.displayDialog();
+    public void displayDialog(RelativeLayout relativeLayout) {
+        super.displayDialog(relativeLayout);
         // Do animate in //
         touchType = PreferenceManager.getTouchType();
         touchColour = PreferenceManager.getTouchColour(); // Sort out what to do with that //

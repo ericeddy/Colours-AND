@@ -31,17 +31,51 @@ public class Helper {
     public static ArrayList<int[]> getThemesList() {
         if(_themesList == null){
             _themesList = new ArrayList<>();
-            _themesList.add( getDefaultColors() );
-            _themesList.add( getLightColors() );
-            _themesList.add( getDarkColors() );
-            _themesList.add( getRedColors() );
-            _themesList.add( getOrangeColors() );
-            _themesList.add( getYellowColors() );
-            _themesList.add( getGreenColors() );
-            _themesList.add( getBlueColors() );
-            _themesList.add( getPurpleColors() );
+            _themesList.add( getDefaultColors() );  // 0
+            _themesList.add( getLightColors() );    // 1
+            _themesList.add( getDarkColors() );     // 2
+            _themesList.add( getRedColors() );      // 3
+            _themesList.add( getOrangeColors() );   // 4
+            _themesList.add( getYellowColors() );   // 5
+            _themesList.add( getGreenColors() );    // 6
+            _themesList.add( getBlueColors() );     // 7
+            _themesList.add( getPurpleColors() );   // 8
         }
         return _themesList;
+    }
+    public static boolean isSelectedColorsRainbow(){
+        int theme = PreferenceManager.getTheme();
+        return theme <= 2;
+    }
+    public static int getDefaultRainbow() { return 0; }
+    public static int getDefaultMono() { return 3; }
+    public static void setDefaultRainbow(){
+        PreferenceManager.setTheme( getDefaultRainbow() );
+        MainActivity.themeChanged();
+    }
+    public static void setNextRainbow(){
+        int theme = PreferenceManager.getTheme();
+        if(theme == 2){
+            theme = 0;
+        } else {
+            theme = theme + 1;
+        }
+        PreferenceManager.setTheme( theme );
+        MainActivity.themeChanged();
+    }
+    public static void setDefaultMono(){
+        PreferenceManager.setTheme( getDefaultMono() );
+        MainActivity.themeChanged();
+    }
+    public static void setNextMono(){
+        int theme = PreferenceManager.getTheme();
+        if(theme == 8){
+            theme = 3;
+        } else {
+            theme = theme + 1;
+        }
+        PreferenceManager.setTheme( theme );
+        MainActivity.themeChanged();
     }
 
     public static int[] getSelectedColors() {

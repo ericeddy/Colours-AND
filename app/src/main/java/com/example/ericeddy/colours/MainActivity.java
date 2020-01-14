@@ -5,14 +5,12 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -22,7 +20,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import java.io.FileNotFoundException;
@@ -48,6 +45,8 @@ public class MainActivity extends AppCompatActivity  {
         return null;
     }
 
+    private RelativeLayout root;
+
     private SettingsBar settingsBar;
     private SettingsView settingsDialog;
     private PresetLayoutsView presetLayouts;
@@ -71,31 +70,34 @@ public class MainActivity extends AppCompatActivity  {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
+        root = findViewById(R.id.root);
+
         dbManager = new DBManager(this);
         dbManager.open();
 
         panel = findViewById(R.id.panel);
 
         settingsBar = findViewById(R.id.bottom_bar);
-        settingsDialog = findViewById(R.id.settings);
-        presetLayouts = findViewById(R.id.presets_panel);
+//        settingsDialog = findViewById(R.id.settings);
+        presetLayouts = new PresetLayoutsView(this);// findViewById(R.id.presets_panel);
         presetLayouts.panel = panel;
 
-        saveDialog = findViewById(R.id.save_dialog);
+        saveDialog = new SaveDialog(this);// findViewById(R.id.save_dialog);
         saveDialog.panel = panel;
         saveDialog.dbManager = dbManager;
 
-        loadDialog = findViewById(R.id.load_dialog);
+        loadDialog = new LoadDialog(this);//  findViewById(R.id.load_dialog);
         loadDialog.panel = panel;
         loadDialog.dbManager = dbManager;
 
-        selectColorDialog = findViewById(R.id.select_color_dialog);
-        selectThemeDialog = findViewById(R.id.theme_dialog);
-        brushSizeDialog = findViewById(R.id.brush_size_dialog);
-        playSpeedDialog = findViewById(R.id.play_speed_dialog);
-        imageLoadDialog = findViewById(R.id.image_load_dialog);
+        selectColorDialog = new SelectColorDialog(this);//  findViewById(R.id.select_color_dialog);
+        selectThemeDialog = new SelectThemeDialog(this);//  findViewById(R.id.theme_dialog);
+        brushSizeDialog = new BrushSizeDialog(this);//  findViewById(R.id.brush_size_dialog);
+        playSpeedDialog = new PlaySpeedDialog(this);//  findViewById(R.id.play_speed_dialog);
+        imageLoadDialog = new ImageLoadDialog(this);//  findViewById(R.id.image_load_dialog);
+        imageLoadDialog.panel = panel;
 
-        areYouSureDialog = findViewById(R.id.are_you_sure_dialog);
+        areYouSureDialog = new AreYouSureDialog(this);//  findViewById(R.id.are_you_sure_dialog);
 
         setPlaying(false);
         panel.brushTypeChanged();
@@ -126,12 +128,12 @@ public class MainActivity extends AppCompatActivity  {
 
     public void displayPresetsDialog() {
         if( settingsBar.isPlaying ) setPlaying(false);
-        presetLayouts.displayDialog();
+        presetLayouts.displayDialog(root);
     }
 
     public void displaySave() {
         if( settingsBar.isPlaying ) setPlaying(false);
-        saveDialog.displayDialog();
+        saveDialog.displayDialog(root);
     }
 
 
@@ -145,7 +147,7 @@ public class MainActivity extends AppCompatActivity  {
 
     public void displayLoad() {
         if( settingsBar.isPlaying ) setPlaying(false);
-        loadDialog.displayDialog();
+        loadDialog.displayDialog(root);
     }
 
 
@@ -166,7 +168,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public void displayTheme() {
-        selectThemeDialog.displayDialog();
+        selectThemeDialog.displayDialog(root);
     }
 
 
@@ -179,7 +181,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public void displayColorSelect() {
-        selectColorDialog.displayDialog();
+        selectColorDialog.displayDialog(root);
     }
 
     public static void displayColorSelectDialog() {
@@ -190,7 +192,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public void displayBrushSizeSlider() {
-        brushSizeDialog.displayDialog( settingsBar.getPositionForBrushSize());
+        brushSizeDialog.displayDialog(root,  settingsBar.getPositionForBrushSize());
     }
 
     public static void displayBrushSizeDialog() {
@@ -201,7 +203,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public void displayPlaySpeedSlider() {
-        playSpeedDialog.displayDialog( settingsBar.getPositionForPlaySpeed());
+        playSpeedDialog.displayDialog(root,  settingsBar.getPositionForPlaySpeed());
     }
 
     public static void displayPlaySpeedDialog() {
@@ -225,7 +227,7 @@ public class MainActivity extends AppCompatActivity  {
                 areYouSureDialog.closeDialog();
             }
         });
-        areYouSureDialog.displayDialog();
+        areYouSureDialog.displayDialog(root);
     }
     public static void displayAreYouSureDialogForDeleteDesign(int id) {
         MainActivity mainActivity = MainActivity.getInstance();
@@ -361,7 +363,6 @@ public class MainActivity extends AppCompatActivity  {
     private static final int READ_EXTERNAL_STORAGE_REQUEST = 9;
 
     public void openGallery() {
-        panel.MyGameSurfaceView_OnPause();
         try {
             if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
@@ -383,6 +384,8 @@ public class MainActivity extends AppCompatActivity  {
                 }
 
             } else {
+//                panel.MyGameSurfaceView_OnPause();
+
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(galleryIntent, PICK_FROM_GALLERY);
             }
@@ -397,9 +400,9 @@ public class MainActivity extends AppCompatActivity  {
             case READ_EXTERNAL_STORAGE_REQUEST:
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Intent intent = new Intent();
+                    Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intent.setType("image/*");
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setAction(Intent.ACTION_PICK);
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_FROM_GALLERY);
                 } else {
                     //do something like displaying a message that he didn`t allow the app to access gallery and you wont be able to let him select from gallery
@@ -419,9 +422,8 @@ public class MainActivity extends AppCompatActivity  {
                 try {
 //                    Bitmap bmp = getBitmapFromUri(selectedImage);
                     Bitmap bmp = handleSamplingAndRotationBitmap(this, selectedImage);
-                    imageLoadDialog.displayDialog(panel.myCanvas_w, panel.myCanvas_h, bmp);
-
-                    panel.MyGameSurfaceView_OnResume();
+                    imageLoadDialog.displayDialog(root, panel.myCanvas_w, panel.myCanvas_h, bmp);
+                    bmp.recycle();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e){
@@ -429,6 +431,7 @@ public class MainActivity extends AppCompatActivity  {
                 }
                 //    imgViewProfilePic.setImageBitmap(yourSelectedImage);
             }
+//            panel.MyGameSurfaceView_OnResume();
         }
     }
 

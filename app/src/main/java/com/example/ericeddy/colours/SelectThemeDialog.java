@@ -12,9 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class SelectThemeDialog extends DialogView {
@@ -59,8 +57,8 @@ public class SelectThemeDialog extends DialogView {
     }
 
     @Override
-    public void displayDialog() {
-        super.displayDialog();
+    public void displayDialog(RelativeLayout relativeLayout) {
+        super.displayDialog(relativeLayout);
 
         currentTheme = PreferenceManager.getTheme();
         themesList = Helper.getThemesList();
