@@ -33,6 +33,7 @@ public class ImageLoadDialog extends DialogView {
     private RelativeLayout doneButton;
 
     int[] colors;
+    int[] previewColors;
     float[] colors_hues;
     float[] colors_values;
     float[] colors_saturation;
@@ -189,10 +190,11 @@ public class ImageLoadDialog extends DialogView {
                 Helper.setNextMono();
             }
 
-            colors = Helper.getSelectedColors();
+            colors = Helper.getBWColors();
             getColorValues();
             getSaturationValues();
         }
+        previewColors = Helper.getSelectedColors();
 
         int xCells = MainActivity.getInstance().panel.xNumCells;
         int yCells = MainActivity.getInstance().panel.yNumCells;
@@ -204,10 +206,11 @@ public class ImageLoadDialog extends DialogView {
         int size = (int)((float)colorPanelWidth / (float)xCells);
         int[][] avgs = new int[yCells][xCells];
         int[][] most = new int[yCells][xCells];
+        int[][] tone = new int[yCells][xCells];
         output = new int[yCells][xCells];
         Set<Integer> uniquePixels = new TreeSet<>();
         SparseIntArray valueMapper = new SparseIntArray();
-        float[] s_minmax = new float[]{1, 0}; float[] v_minmax = new float[]{1, 0};
+//        float[] s_minmax = new float[]{1, 0}; float[] v_minmax = new float[]{1, 0};
         for( int y = 0; y < yCells; y++){
             for( int x = 0; x < xCells; x++){
                 int[] pixels = getBitmapPixels(allPixels, renderWidth, x, y, size);
@@ -230,43 +233,50 @@ public class ImageLoadDialog extends DialogView {
                         largestCountC = p;
                     }
                 }
-                int c = Color.rgb( (int)((redBucket / pixelCount)), (int)((greenBucket / pixelCount)), (int)((blueBucket / pixelCount)));
+                int rA = (int)((redBucket / pixelCount)); int gA = (int)((greenBucket / pixelCount)); int bA = (int)((blueBucket / pixelCount));
+                int c = Color.rgb( rA, gA, bA);
+                int pAVG = (int)((float)(rA + gA + bA) / (float) 3); // BW AVG
+                int pC = Color.rgb(pAVG,pAVG,pAVG); // BW AVG
                 avgs[y][x] = c;
                 most[y][x] = largestCountC;
-                uniquePixels.add(largestCountC);
-                float[] hsv = new float[3];
-                Color.colorToHSV(c, hsv);
-                if(hsv[1] < s_minmax[0]){
-                    s_minmax[0] = hsv[1];
-                }
-                if(hsv[1] > s_minmax[1]){
-                    s_minmax[1] = hsv[1];
-                }
-                if(hsv[2] < v_minmax[0]){
-                    v_minmax[0] = hsv[2];
-                }
-                if(hsv[2] > v_minmax[1]){
-                    v_minmax[1] = hsv[2];
-                }
+                tone[y][x] = pC;
+//                if(y == 8){
+//                    Log.v("PIXEL", "y: " + y + ", x: " + x + " = " + Integer.toHexString(c) + " - " + rA + " - " + gA + " - " + bA + " - " + pAVG + " = " + Integer.toHexString(pC));
+//                }
+                uniquePixels.add( (mode == 1) ? largestCountC : pC );
+//                float[] hsv = new float[3];
+//                Color.colorToHSV(c, hsv);
+//                if(hsv[1] < s_minmax[0]){
+//                    s_minmax[0] = hsv[1];
+//                }
+//                if(hsv[1] > s_minmax[1]){
+//                    s_minmax[1] = hsv[1];
+//                }
+//                if(hsv[2] < v_minmax[0]){
+//                    v_minmax[0] = hsv[2];
+//                }
+//                if(hsv[2] > v_minmax[1]){
+//                    v_minmax[1] = hsv[2];
+//                }
             }
         }
 
-        Log.v("MINMAX", "color - s: " + colors_saturation_minmax[0] + " - " + colors_saturation_minmax[1] + "; v:" + colors_values_minmax[0] + " - " + colors_values_minmax[1] );
-        Log.v("MINMAX", "image - s: " + s_minmax[0] + " - " + s_minmax[1] + "; v:" + v_minmax[0] + " - " + v_minmax[1] );
-        float[] sRanges = new float[] {colors_saturation_minmax[1] - colors_saturation_minmax[0], s_minmax[1] - s_minmax[0]};
-        float[] vRanges = new float[] {colors_values_minmax[1] - colors_values_minmax[0], v_minmax[1] - v_minmax[0]};
-        Log.v("RANGES", "range - s: " + sRanges[0] + " - " + sRanges[1] + "; v:" + vRanges[0] + " - " + vRanges[1] );
-        float s_scale = sRanges[0] / sRanges[1]; float v_scale = vRanges[0] / vRanges[1];
+//        Log.v("MINMAX", "color - s: " + colors_saturation_minmax[0] + " - " + colors_saturation_minmax[1] + "; v:" + colors_values_minmax[0] + " - " + colors_values_minmax[1] );
+//        Log.v("MINMAX", "image - s: " + s_minmax[0] + " - " + s_minmax[1] + "; v:" + v_minmax[0] + " - " + v_minmax[1] );
+//        float[] sRanges = new float[] {colors_saturation_minmax[1] - colors_saturation_minmax[0], s_minmax[1] - s_minmax[0]};
+//        float[] vRanges = new float[] {colors_values_minmax[1] - colors_values_minmax[0], v_minmax[1] - v_minmax[0]};
+//        Log.v("RANGES", "range - s: " + sRanges[0] + " - " + sRanges[1] + "; v:" + vRanges[0] + " - " + vRanges[1] );
+//        float s_scale = sRanges[0] / sRanges[1]; float v_scale = vRanges[0] / vRanges[1];
 
         for(int c : uniquePixels) {
             float[] hsv = new float[3];
             Color.colorToHSV(c, hsv);
             int i = 0;
             float h = hsv[0];
-            float s = hsv[1];
-            float v = hsv[2];
-            float scaled_s = (s * s_scale) + colors_saturation_minmax[0];
-            float scaled_v = (v * v_scale) + colors_values_minmax[0];
+//            float s = hsv[1];
+//            float v = hsv[2];
+//            float scaled_s = (s * s_scale) + colors_saturation_minmax[0];
+//            float scaled_v = (v * v_scale) + colors_values_minmax[0];
             if( mode == 1 ){
                 while( h > colors_hues[i] ){
                     i++;
@@ -284,52 +294,63 @@ public class ImageLoadDialog extends DialogView {
 //                    Log.v("Mapper", ind + " - " + h + " - " + c);
                 }
             } else if( mode == 2 ) {
+                int grey = Color.red(c);
+                float step = 9.1875f;
+                int full = 27 - (int)(Math.floor((float)grey / step));
 
-                int max = 0;
-                if( scaled_s > 0.9 && scaled_s > scaled_v && scaled_v/scaled_s > 0.6){
-                    // 0-7 index
-                    i = 0;
-                    max = 8;
-                } else if(scaled_s > scaled_v && scaled_v/scaled_s > 0.4){
-                    // 8-13 index
-                    i = 8;
-                    max = 14;
-                } else if( scaled_s > scaled_v ? scaled_v / scaled_s > 0.9 : scaled_s / scaled_v > 0.9 ){
-                    // 22-27 index
-                    i = 22;
-                    max = 28;
-                } else {
-                    // 14-21 index
-                    i = 14;
-                    max = 22;
-                }
-                int index = 0;
-                int diffIndexS = 0;
-                int diffIndexV = 0;
-                float minDiffS = 1;
-                float minDiffV = 1;
-                while(i < max){
-                    float cs = colors_saturation[i];
-                    float cv = colors_values[i];
+                boolean firstHalf = full % 2 == 0;
+                int index = full/2;//firstHalf ? full / 2 : 14 + ( 13 - (full / 2) ) ;
 
-                    float fs = scaled_s < cs ? cs - scaled_s : scaled_s - cs;
-                    float fv = scaled_v < cv ? cv - scaled_v : scaled_v - cv;
+//                Log.v("MAPPER", "index" + index + " = " + Integer.toHexString(c));
+                valueMapper.append(c, index);
 
-                    if(fs < minDiffS){
-                        minDiffS = fs;
-                        diffIndexS = index;
-                    }
-                    if(fv < minDiffV){
-                        minDiffV = fv;
-                        diffIndexV = index;
-                    }
+//                int max = 0;
+//                if( scaled_s > 0.9 && scaled_s > scaled_v && scaled_v/scaled_s > 0.6){
+//                    // 0-7 index
+//                    i = 0;
+//                    max = 8;
+//                } else if(scaled_s > scaled_v && scaled_v/scaled_s > 0.4){
+//                    // 8-13 index
+//                    i = 8;
+//                    max = 14;
+//                } else if( scaled_s > scaled_v ? scaled_v / scaled_s > 0.9 : scaled_s / scaled_v > 0.9 ){
+//                    // 22-27 index
+//                    i = 22;
+//                    max = 28;
+//                } else {
+//                    // 14-21 index
+//                    i = 14;
+//                    max = 22;
+//                }
 
-                    i++;
-                    index++;
-                }
 
-                int colorID = (minDiffS < minDiffV ? diffIndexS : diffIndexV);
-                valueMapper.append(c, colorID);
+//                int index = 0;
+//                int diffIndexS = 0;
+//                int diffIndexV = 0;
+//                float minDiffS = 1;
+//                float minDiffV = 1;
+//                while(i < max){
+//                    float cs = colors_saturation[i];
+//                    float cv = colors_values[i];
+//
+//                    float fs = scaled_s < cs ? cs - scaled_s : scaled_s - cs;
+//                    float fv = scaled_v < cv ? cv - scaled_v : scaled_v - cv;
+//
+//                    if(fs < minDiffS){
+//                        minDiffS = fs;
+//                        diffIndexS = index;
+//                    }
+//                    if(fv < minDiffV){
+//                        minDiffV = fv;
+//                        diffIndexV = index;
+//                    }
+//
+//                    i++;
+//                    index++;
+//                }
+//
+//                int colorID = (minDiffS < minDiffV ? diffIndexS : diffIndexV);
+
                 /*
 
 
@@ -358,11 +379,12 @@ public class ImageLoadDialog extends DialogView {
         for( int y = 0; y < yCells; y++) {
             for (int x = 0; x < xCells; x++) {
 
-                int cellValue = most[y][x];
+                int cellValue = mode == 2 ? tone[y][x] : most[y][x];
                 if(mode == 0){
                     p.setColor( cellValue );
                 } else {
-                    p.setColor( Helper.getContextColor(colors[valueMapper.get(cellValue)]) );
+                    int[] cs = mode == 2 ? previewColors : colors;
+                    p.setColor( Helper.getContextColor(cs[valueMapper.get(cellValue)]) );
                     output[y][x] = valueMapper.get(cellValue);
                 }
                 Rect currentRect = new Rect(x * size, y * size, (x * size) + size, (y * size) + size);

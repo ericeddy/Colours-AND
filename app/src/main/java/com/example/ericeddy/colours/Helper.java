@@ -34,12 +34,13 @@ public class Helper {
             _themesList.add( getDefaultColors() );  // 0
             _themesList.add( getLightColors() );    // 1
             _themesList.add( getDarkColors() );     // 2
-            _themesList.add( getRedColors() );      // 3
-            _themesList.add( getOrangeColors() );   // 4
-            _themesList.add( getYellowColors() );   // 5
-            _themesList.add( getGreenColors() );    // 6
-            _themesList.add( getBlueColors() );     // 7
-            _themesList.add( getPurpleColors() );   // 8
+            _themesList.add( getBWColors() );       // 3
+            _themesList.add( getRedColors() );      // 4
+            _themesList.add( getOrangeColors() );   // 5
+            _themesList.add( getYellowColors() );   // 6
+            _themesList.add( getGreenColors() );    // 7
+            _themesList.add( getBlueColors() );     // 8
+            _themesList.add( getPurpleColors() );   // 9
         }
         return _themesList;
     }
@@ -69,7 +70,7 @@ public class Helper {
     }
     public static void setNextMono(){
         int theme = PreferenceManager.getTheme();
-        if(theme == 8){
+        if(theme == 9){
             theme = 3;
         } else {
             theme = theme + 1;
@@ -148,6 +149,17 @@ public class Helper {
                 R.color.purple_rainbow_61, R.color.purple_rainbow_62, R.color.purple_rainbow_63, R.color.purple_rainbow_64,
                 R.color.purple_rainbow_71, R.color.purple_rainbow_72, R.color.purple_rainbow_73, R.color.purple_rainbow_74,
                 R.color.purple_rainbow_81, R.color.purple_rainbow_82, R.color.purple_rainbow_83, R.color.purple_rainbow_84 };
+        return lightRainbowRes;
+    }
+    public static int[] getBWColors() {
+        int[] lightRainbowRes = {
+                R.color.bw_rainbow_11, R.color.bw_rainbow_12, R.color.bw_rainbow_13, R.color.bw_rainbow_14,
+                R.color.bw_rainbow_21, R.color.bw_rainbow_22, R.color.bw_rainbow_23, R.color.bw_rainbow_24,
+                R.color.bw_rainbow_31, R.color.bw_rainbow_32, R.color.bw_rainbow_33, R.color.bw_rainbow_34,
+                R.color.bw_rainbow_51, R.color.bw_rainbow_52, R.color.bw_rainbow_53, R.color.bw_rainbow_54,
+                R.color.bw_rainbow_61, R.color.bw_rainbow_62, R.color.bw_rainbow_63, R.color.bw_rainbow_64,
+                R.color.bw_rainbow_71, R.color.bw_rainbow_72, R.color.bw_rainbow_73, R.color.bw_rainbow_74,
+                R.color.bw_rainbow_81, R.color.bw_rainbow_82, R.color.bw_rainbow_83, R.color.bw_rainbow_84 };
         return lightRainbowRes;
     }
     public static int[] getRedColors() {

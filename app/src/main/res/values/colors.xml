@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Alpha Cheat Sheet ~
+           100% — FF
+           95% — F2
+           90% — E6
+           85% — D9
+           80% — CC
+           75% — BF
+           70% — B3
+           65% — A6
+           60% — 99
+           55% — 8C
+           50% — 80
+           45% — 73
+           40% — 66
+           35% — 59
+           30% — 4D
+           25% — 40
+           20% — 33
+           15% — 26
+           10% — 1A
+           5% — 0D
+           0% — 00     -->
+
     <color name="black">#000000</color>
     <color name="grey_1">#111111</color>
     <color name="grey_2">#222222</color>
@@ -305,6 +329,35 @@
     <color name="blue_rainbow_82">#0d0dd8</color>
     <color name="blue_rainbow_83">#0808e5</color>
     <color name="blue_rainbow_84">#0404f2</color>
+
+    <color name="bw_rainbow_11">#f8f8f8</color>
+    <color name="bw_rainbow_12">#e6e6e6</color>
+    <color name="bw_rainbow_13">#d3d3d3</color>
+    <color name="bw_rainbow_14">#c1c1c1</color>
+    <color name="bw_rainbow_21">#afafaf</color>
+    <color name="bw_rainbow_22">#9c9c9c</color>
+    <color name="bw_rainbow_23">#8a8a8a</color>
+    <color name="bw_rainbow_24">#777777</color>
+    <color name="bw_rainbow_31">#656565</color>
+    <color name="bw_rainbow_32">#535353</color>
+    <color name="bw_rainbow_33">#404040</color>
+    <color name="bw_rainbow_34">#2e2e2e</color>
+    <color name="bw_rainbow_51">#1c1c1c</color>
+    <color name="bw_rainbow_52">#090909</color>
+    <color name="bw_rainbow_53">#000000</color>
+    <color name="bw_rainbow_54">#121212</color>
+    <color name="bw_rainbow_61">#252525</color>
+    <color name="bw_rainbow_62">#373737</color>
+    <color name="bw_rainbow_63">#4a4a4a</color>
+    <color name="bw_rainbow_64">#5c5c5c</color>
+    <color name="bw_rainbow_71">#6e6e6e</color>
+    <color name="bw_rainbow_72">#818181</color>
+    <color name="bw_rainbow_73">#939393</color>
+    <color name="bw_rainbow_74">#a5a5a5</color>
+    <color name="bw_rainbow_81">#b8b8b8</color>
+    <color name="bw_rainbow_82">#cacaca</color>
+    <color name="bw_rainbow_83">#dddddd</color>
+    <color name="bw_rainbow_84">#efefef</color>
 
     <color name="colorPrimary">#800080</color>
     <color name="colorPrimaryDark">#610062</color>

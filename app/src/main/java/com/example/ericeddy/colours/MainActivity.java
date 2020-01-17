@@ -123,6 +123,10 @@ public class MainActivity extends AppCompatActivity  {
     }
     @Override
     public void onBackPressed() {
+        if(settingsBar.isPlaying){
+            panel.setIsPlaying(false);
+            settingsBar.setPlaying(false);
+        }
         panel.undoLastAction();
     }
 
@@ -295,6 +299,9 @@ public class MainActivity extends AppCompatActivity  {
         MainActivity mainActivity = MainActivity.getInstance();
         if (mainActivity != null) {
             mainActivity.panel.resetCells();
+            if (mainActivity.settingsBar.isPlaying) {
+                setPlaying(false);
+            }
         }
     }
     public static void setPlaying(boolean playing) {
