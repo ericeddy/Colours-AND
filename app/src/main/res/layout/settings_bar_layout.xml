@@ -63,7 +63,7 @@
                             <ImageView
                                 android:layout_width="28dp"
                                 android:layout_height="28dp"
-                                android:src="@drawable/ic_colorize_black_24dp"/>
+                                android:src="@drawable/ic_fill"/>
                             <TextView
                                 android:textSize="12sp"
                                 android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
                             <ImageView
                                 android:layout_width="28dp"
                                 android:layout_height="28dp"
-                                android:src="@drawable/ic_format_indent_decrease_black_24dp"/>
+                                android:src="@drawable/ic_decrease"/>
                             <TextView
                                 android:textSize="12sp"
                                 android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
                             <ImageView
                                 android:layout_width="28dp"
                                 android:layout_height="28dp"
-                                android:src="@drawable/ic_format_indent_increase_black_24dp"/>
+                                android:src="@drawable/ic_increase"/>
                             <TextView
                                 android:textSize="12sp"
                                 android:layout_width="wrap_content"

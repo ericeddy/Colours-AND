@@ -179,7 +179,6 @@ public class ColourPanel extends SurfaceView implements SurfaceHolder.Callback {
         if( touchSize == 0 ){
             affectCellValue(cellY, cellX);
         } else {
-            ArrayList<Integer> cellsToAffect = new ArrayList<>();
 
             int length = 1 + (touchSize * 2); // touch = 1; length = 3;
             int skip = 0;
