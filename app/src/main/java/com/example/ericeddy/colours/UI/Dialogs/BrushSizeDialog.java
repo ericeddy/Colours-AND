@@ -1,9 +1,12 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.UI.Dialogs;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.widget.RelativeLayout;
+
+import com.example.ericeddy.colours.System.PreferenceManager;
+import com.example.ericeddy.colours.UI.MainActivity;
+import com.example.ericeddy.colours.UI.SettingsBar;
 
 public class BrushSizeDialog extends SliderSelectDialog {
 

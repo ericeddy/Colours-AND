@@ -1,4 +1,4 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.UI.Dialogs;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+
+import com.example.ericeddy.colours.System.DBManager;
+import com.example.ericeddy.colours.R;
+import com.example.ericeddy.colours.System.SQLiteHelper;
+import com.example.ericeddy.colours.UI.ColourPanel;
 
 public class SaveDialog extends DialogView {
 

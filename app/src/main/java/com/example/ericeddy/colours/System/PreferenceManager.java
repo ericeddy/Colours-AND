@@ -1,9 +1,9 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.System;
 
 import android.content.SharedPreferences;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import com.example.ericeddy.colours.UI.MainActivity;
+
 import java.util.Date;
 
 public class PreferenceManager {

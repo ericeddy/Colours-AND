@@ -1,14 +1,12 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.UI;
 
 import android.content.Context;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
-import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.PaintDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -20,7 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.Timer;
+import com.example.ericeddy.colours.System.Helper;
+import com.example.ericeddy.colours.System.PreferenceManager;
+import com.example.ericeddy.colours.R;
 
 public class SettingsBar extends RelativeLayout {
 

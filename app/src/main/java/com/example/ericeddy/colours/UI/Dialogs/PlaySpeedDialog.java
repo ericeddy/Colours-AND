@@ -1,8 +1,11 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.UI.Dialogs;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+
+import com.example.ericeddy.colours.System.PreferenceManager;
+import com.example.ericeddy.colours.UI.MainActivity;
 
 public class PlaySpeedDialog extends SliderSelectDialog {
 

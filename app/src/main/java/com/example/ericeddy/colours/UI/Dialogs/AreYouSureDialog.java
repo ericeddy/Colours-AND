@@ -1,11 +1,14 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.UI.Dialogs;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
+
+import com.example.ericeddy.colours.System.DBManager;
+import com.example.ericeddy.colours.R;
+import com.example.ericeddy.colours.UI.ColourPanel;
 
 public class AreYouSureDialog extends DialogView {
 

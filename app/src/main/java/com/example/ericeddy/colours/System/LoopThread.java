@@ -1,6 +1,8 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.System;
 
 import android.os.SystemClock;
+
+import com.example.ericeddy.colours.UI.ColourPanel;
 
 public class LoopThread extends Thread {
 

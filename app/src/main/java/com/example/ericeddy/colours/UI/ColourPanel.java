@@ -1,4 +1,4 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.UI;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,6 +12,10 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import com.example.ericeddy.colours.System.Helper;
+import com.example.ericeddy.colours.System.LoopThread;
+import com.example.ericeddy.colours.System.PreferenceManager;
 
 import java.util.ArrayList;
 

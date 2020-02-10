@@ -1,4 +1,4 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.UI.Dialogs;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,7 +12,10 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.RelativeLayout;
+
+import com.example.ericeddy.colours.System.Helper;
+import com.example.ericeddy.colours.R;
+import com.example.ericeddy.colours.UI.ColourPanel;
 
 public class PresetLayoutsView extends DialogView {
 

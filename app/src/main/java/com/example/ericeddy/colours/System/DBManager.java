@@ -1,4 +1,4 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.System;
 
 import android.content.ContentValues;
 import android.content.Context;

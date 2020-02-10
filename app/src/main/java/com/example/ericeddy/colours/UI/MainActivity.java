@@ -1,4 +1,4 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.UI;
 
 import android.Manifest;
 import android.content.ContentResolver;
@@ -21,6 +21,19 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+
+import com.example.ericeddy.colours.System.DBManager;
+import com.example.ericeddy.colours.R;
+import com.example.ericeddy.colours.UI.Dialogs.AreYouSureDialog;
+import com.example.ericeddy.colours.UI.Dialogs.BrushSizeDialog;
+import com.example.ericeddy.colours.UI.Dialogs.ImageLoadDialog;
+import com.example.ericeddy.colours.UI.Dialogs.LoadDialog;
+import com.example.ericeddy.colours.UI.Dialogs.PlaySpeedDialog;
+import com.example.ericeddy.colours.UI.Dialogs.PresetLayoutsView;
+import com.example.ericeddy.colours.UI.Dialogs.SaveDialog;
+import com.example.ericeddy.colours.UI.Dialogs.SelectColorDialog;
+import com.example.ericeddy.colours.UI.Dialogs.SelectThemeDialog;
+import com.example.ericeddy.colours.UI.Dialogs.SettingsView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

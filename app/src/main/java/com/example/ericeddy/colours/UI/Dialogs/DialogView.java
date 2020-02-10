@@ -1,4 +1,4 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.UI.Dialogs;
 
 import android.content.Context;
 import android.graphics.LinearGradient;
@@ -11,6 +11,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
+import com.example.ericeddy.colours.System.Helper;
+import com.example.ericeddy.colours.R;
 
 public class DialogView extends RelativeLayout {
 

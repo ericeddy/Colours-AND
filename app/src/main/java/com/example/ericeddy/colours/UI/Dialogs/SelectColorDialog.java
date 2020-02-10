@@ -1,4 +1,4 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.UI.Dialogs;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import com.example.ericeddy.colours.System.Helper;
+import com.example.ericeddy.colours.System.PreferenceManager;
+import com.example.ericeddy.colours.R;
+import com.example.ericeddy.colours.UI.MainActivity;
 
 public class SelectColorDialog extends DialogView {
 

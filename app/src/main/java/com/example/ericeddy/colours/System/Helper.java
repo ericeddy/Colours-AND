@@ -1,11 +1,13 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.System;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.TypedValue;
+
+import com.example.ericeddy.colours.R;
+import com.example.ericeddy.colours.UI.MainActivity;
 
 import java.util.ArrayList;
 

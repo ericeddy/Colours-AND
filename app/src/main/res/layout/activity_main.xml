@@ -6,100 +6,100 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.ericeddy.colours.ColourPanel
+    <com.example.ericeddy.colours.UI.ColourPanel
         android:id="@+id/panel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_bar"/>
 
-    <com.example.ericeddy.colours.SettingsBar
+    <com.example.ericeddy.colours.UI.SettingsBar
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true" />
 
-    <!--<com.example.ericeddy.colours.SettingsView
+    <!--<com.example.ericeddy.colours.UI.Dialogs.SettingsView
         android:id="@+id/settings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="false"
         android:clickable="false">
 
-    </com.example.ericeddy.colours.SettingsView>
+    </com.example.ericeddy.colours.UI.Dialogs.SettingsView>
 
-    <com.example.ericeddy.colours.PresetLayoutsView
+    <com.example.ericeddy.colours.UI.Dialogs.PresetLayoutsView
         android:id="@+id/presets_panel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="false"
         android:clickable="false">
 
-    </com.example.ericeddy.colours.PresetLayoutsView>
+    </com.example.ericeddy.colours.UI.Dialogs.PresetLayoutsView>
 
 
-    <com.example.ericeddy.colours.SaveDialog
+    <com.example.ericeddy.colours.UI.Dialogs.SaveDialog
         android:id="@+id/save_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="false"
         android:clickable="false">
 
-    </com.example.ericeddy.colours.SaveDialog>
-    <com.example.ericeddy.colours.LoadDialog
+    </com.example.ericeddy.colours.UI.Dialogs.SaveDialog>
+    <com.example.ericeddy.colours.UI.Dialogs.LoadDialog
         android:id="@+id/load_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="false"
         android:clickable="false">
 
-    </com.example.ericeddy.colours.LoadDialog>
-    <com.example.ericeddy.colours.SelectColorDialog
+    </com.example.ericeddy.colours.UI.Dialogs.LoadDialog>
+    <com.example.ericeddy.colours.UI.Dialogs.SelectColorDialog
         android:id="@+id/select_color_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="false"
         android:clickable="false">
 
-    </com.example.ericeddy.colours.SelectColorDialog>
-    <com.example.ericeddy.colours.SelectThemeDialog
+    </com.example.ericeddy.colours.UI.Dialogs.SelectColorDialog>
+    <com.example.ericeddy.colours.UI.Dialogs.SelectThemeDialog
         android:id="@+id/theme_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="false"
         android:clickable="false">
 
-    </com.example.ericeddy.colours.SelectThemeDialog>
-    <com.example.ericeddy.colours.BrushSizeDialog
+    </com.example.ericeddy.colours.UI.Dialogs.SelectThemeDialog>
+    <com.example.ericeddy.colours.UI.Dialogs.BrushSizeDialog
         android:id="@+id/brush_size_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="false"
         android:clickable="false">
 
-    </com.example.ericeddy.colours.BrushSizeDialog>
-    <com.example.ericeddy.colours.PlaySpeedDialog
+    </com.example.ericeddy.colours.UI.Dialogs.BrushSizeDialog>
+    <com.example.ericeddy.colours.UI.Dialogs.PlaySpeedDialog
         android:id="@+id/play_speed_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="false"
         android:clickable="false">
 
-    </com.example.ericeddy.colours.PlaySpeedDialog>
-    <com.example.ericeddy.colours.ImageLoadDialog
+    </com.example.ericeddy.colours.UI.Dialogs.PlaySpeedDialog>
+    <com.example.ericeddy.colours.UI.Dialogs.ImageLoadDialog
         android:id="@+id/image_load_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="false"
         android:clickable="false">
 
-    </com.example.ericeddy.colours.ImageLoadDialog>
-    <com.example.ericeddy.colours.AreYouSureDialog
+    </com.example.ericeddy.colours.UI.Dialogs.ImageLoadDialog>
+    <com.example.ericeddy.colours.UI.Dialogs.AreYouSureDialog
         android:id="@+id/are_you_sure_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusable="false"
         android:clickable="false">
 
-    </com.example.ericeddy.colours.AreYouSureDialog>-->
+    </com.example.ericeddy.colours.UI.Dialogs.AreYouSureDialog>-->
 
 </RelativeLayout>

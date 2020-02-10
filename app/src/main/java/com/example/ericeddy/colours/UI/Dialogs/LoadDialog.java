@@ -1,4 +1,4 @@
-package com.example.ericeddy.colours;
+package com.example.ericeddy.colours.UI.Dialogs;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -13,6 +13,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.ericeddy.colours.System.DBManager;
+import com.example.ericeddy.colours.R;
+import com.example.ericeddy.colours.System.SQLiteHelper;
+import com.example.ericeddy.colours.UI.ColourPanel;
+import com.example.ericeddy.colours.UI.MainActivity;
 
 import java.io.IOException;
 
